@@ -11,6 +11,21 @@ class _loginState extends State<login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text
+          ("Welcome"),
+        backgroundColor: Colors.green,
+        centerTitle: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(400)),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(200),
+          child: SizedBox(
+
+          ),
+        ),
+      ),
       backgroundColor: Colors.yellow[800],
       body: SafeArea(
         child: Container(
@@ -114,7 +129,7 @@ class _loginState extends State<login> {
                 ],
               ),
 
-              
+
             ],
           ),
         ),
