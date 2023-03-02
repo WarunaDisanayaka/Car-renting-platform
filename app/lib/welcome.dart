@@ -16,7 +16,7 @@ class _welcomeState extends State<welcome> {
         child: Container(
           child:Column(
             children: [
-              Icon(Icons.add),
+              Image(image: AssetImage('assets/img1.jpeg')),
               Text("hello"),
             ],
           ),
