@@ -41,48 +41,55 @@ class _welcomeState extends State<welcome> {
                 ),
               ),
 
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: OutlinedButton(
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(
-                            width: 2.0, // set the border weight to 2.0
-                            color: Colors.green,
-                          ),
-                        ),
-                        onPressed: () {},
-                      ),
-                    ),
 
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: OutlinedButton(
-                        child: Text(
-                          "Register",
-                          style: TextStyle(
-                            color: Colors.black,
+
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: OutlinedButton(
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
                           ),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(
-                            width: 2.0, // set the border weight to 2.0
-                            color: Colors.green,
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(
+                              width: 2.0, // set the border weight to 2.0
+                              color: Colors.green,
+                            ),
+                              fixedSize: Size(150, 50),
                           ),
+                          onPressed: () {},
                         ),
-                        onPressed: () {},
                       ),
-                    ),
-                  ],
+
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: OutlinedButton(
+                          child: Text(
+                            "Register",
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(
+                              width: 2.0, // set the border weight to 2.0
+                              color: Colors.green,
+                            ),
+                            fixedSize: Size(150, 50),
+                          ),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],
