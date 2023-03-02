@@ -11,13 +11,80 @@ class _welcomeState extends State<welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
+      backgroundColor: Colors.yellow[800],
       body: SafeArea(
         child: Container(
-          child:Column(
+          child: Column(
             children: [
-              Image(image: AssetImage('assets/img1.jpeg')),
-              Text("hello"),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Image(
+                  image: AssetImage(
+                    'assets/15.png',
+                  ),
+                  height: 400,
+                ),
+              ),
+              Text(
+                "Select Your Vehicle",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  "Lets's book your vehicle first you neetto register to the system Thnak you",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(),
+                ),
+              ),
+
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: OutlinedButton(
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(
+                            width: 2.0, // set the border weight to 2.0
+                            color: Colors.green,
+                          ),
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: OutlinedButton(
+                        child: Text(
+                          "Register",
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(
+                            width: 2.0, // set the border weight to 2.0
+                            color: Colors.green,
+                          ),
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
