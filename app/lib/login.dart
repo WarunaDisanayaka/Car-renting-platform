@@ -26,7 +26,6 @@ class _loginState extends State<login> {
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(200),
           child: SizedBox(
-
           ),
         ),
       ),
