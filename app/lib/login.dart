@@ -17,6 +17,10 @@ class _loginState extends State<login> {
         backgroundColor: Colors.green,
         centerTitle: true,
         shape: RoundedRectangleBorder(
+          side: BorderSide(
+            width: 2,
+            color: Colors.green,
+          ),
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(400)),
         ),
         bottom: PreferredSize(
