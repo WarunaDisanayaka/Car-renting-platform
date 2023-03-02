@@ -11,7 +11,17 @@ class _welcomeState extends State<welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      backgroundColor: Colors.amber,
+      body: SafeArea(
+        child: Container(
+          child:Column(
+            children: [
+              Icon(Icons.add),
+              Text("hello"),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
