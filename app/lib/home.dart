@@ -8,6 +8,8 @@ class home extends StatefulWidget {
   State<home> createState() => _homeState();
 }
 
+TextEditingController _controller = TextEditingController(text: "2022/03/05");
+
 class _homeState extends State<home> {
   @override
   Widget build(BuildContext context) {
@@ -31,10 +33,11 @@ class _homeState extends State<home> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(1)),
+                    borderRadius: BorderRadius.circular(3)),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: TextField(
+                    controller: _controller,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       suffixIcon: IconButton(
@@ -47,8 +50,14 @@ class _homeState extends State<home> {
                             builder: (context) {
                               return Container(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.4,
-                                color: Colors.white,
+                                    MediaQuery.of(context).size.height * 0.36,
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(40.0),
+                                    topRight: Radius.circular(40.0),
+                                  ),
+                                ),
                                 child: Column(
                                   children: [
                                     TextButton(
