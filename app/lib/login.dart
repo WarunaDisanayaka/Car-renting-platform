@@ -1,3 +1,4 @@
+import 'package:cr_app/home.dart';
 import 'package:flutter/material.dart';
 
 class login extends StatefulWidget {
@@ -112,7 +113,7 @@ class _loginState extends State<login> {
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => login()));
+                        MaterialPageRoute(builder: (context) => home()));
                   },
                 ),
               ),
