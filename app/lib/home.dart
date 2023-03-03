@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class home extends StatefulWidget {
@@ -19,7 +20,9 @@ class _homeState extends State<home> {
       body: Container(
         child: Column(
           children: [
-            SizedBox(height: 30,),
+            SizedBox(
+              height: 30,
+            ),
 
             //select stsrt date
             Padding(
@@ -39,6 +42,31 @@ class _homeState extends State<home> {
                         onPressed: () {
                           // handle the tap event
                           print('Icon tapped!');
+                          showCupertinoModalPopup(
+                            context: context,
+                            builder: (context) {
+                              return Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.4,
+                                color: Colors.white,
+                                child: Column(
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text('Done'),
+                                    ),
+                                    Expanded(
+                                      child: CupertinoDatePicker(
+                                        onDateTimeChanged: (date) {},
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          );
                         },
                       ),
                       hintText: '2023/03/20',
@@ -48,7 +76,6 @@ class _homeState extends State<home> {
               ),
             ),
           ],
-
         ),
       ),
     );
