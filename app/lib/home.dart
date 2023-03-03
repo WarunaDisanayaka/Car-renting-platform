@@ -39,7 +39,7 @@ class _homeState extends State<home> {
                           print('Icon tapped!');
                         },
                       ),
-                      hintText: 'Email',
+                      hintText: '2023/03/20',
                     ),
                   ),
                 ),
