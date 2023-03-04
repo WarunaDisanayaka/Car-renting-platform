@@ -7,7 +7,8 @@ class home extends StatefulWidget {
   @override
   State<home> createState() => _homeState();
 }
-String txt ="2023/03/03";
+
+String txt = "2023/03/03";
 TextEditingController _controller = TextEditingController(text: txt);
 
 class _homeState extends State<home> {
@@ -23,10 +24,9 @@ class _homeState extends State<home> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             //select stsrt date
             Padding(
-            padding: EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
+              padding: EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
               child: Text(
                 "Select Pic-Up Date ",
                 style: TextStyle(
@@ -94,8 +94,6 @@ class _homeState extends State<home> {
               ),
             ),
 
-
-
             //select END date
             Padding(
               padding: EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
@@ -131,7 +129,7 @@ class _homeState extends State<home> {
                             builder: (context) {
                               return Container(
                                 height:
-                                MediaQuery.of(context).size.height * 0.36,
+                                    MediaQuery.of(context).size.height * 0.36,
                                 decoration: BoxDecoration(
                                   color: Colors.green,
                                   borderRadius: BorderRadius.only(
@@ -166,7 +164,33 @@ class _homeState extends State<home> {
               ),
             ),
 
-
+            Padding(
+              padding: EdgeInsets.only(top: 20, bottom: 8, left: 150, right: 5),
+              child: OutlinedButton(
+                child: Text(
+                  "Filter",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                  ),
+                ),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(
+                    width: 5.0, // set the border weight to 2.0
+                    color: Colors.green,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  fixedSize: Size(150, 50),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => home()));
+                },
+              ),
+            ),
           ],
         ),
       ),
