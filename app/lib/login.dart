@@ -71,6 +71,7 @@ class _loginState extends State<login> {
                   height: 20,
                 ),
 
+                
                 //password
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
