@@ -13,8 +13,7 @@ class _loginState extends State<login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text
-          ("Welcome"),
+        title: Text("Welcome"),
         backgroundColor: Colors.green,
         centerTitle: true,
         shape: RoundedRectangleBorder(
@@ -26,8 +25,7 @@ class _loginState extends State<login> {
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(200),
-          child: SizedBox(
-          ),
+          child: SizedBox(),
         ),
       ),
       backgroundColor: Colors.yellow[800],
@@ -71,7 +69,6 @@ class _loginState extends State<login> {
                   height: 20,
                 ),
 
-                
                 //password
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -128,14 +125,15 @@ class _loginState extends State<login> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Not a member? .'),
-                    Text("Not a member? .",style: TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),),
+                    Text(
+                      "Not a member? .",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
-
-
               ],
             ),
           ),
