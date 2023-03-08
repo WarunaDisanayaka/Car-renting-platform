@@ -58,7 +58,9 @@ class _registerState extends State<register> {
                 ),
               ),
 
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               //email
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -79,7 +81,9 @@ class _registerState extends State<register> {
                 ),
               ),
 
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
 
               //email
               Padding(
@@ -101,8 +105,9 @@ class _registerState extends State<register> {
                 ),
               ),
 
-
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               //email
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -123,8 +128,9 @@ class _registerState extends State<register> {
                 ),
               ),
 
-
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               //email
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -174,10 +180,12 @@ class _registerState extends State<register> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Alrady Member"),
-                    Text(" .Login nor",
-                    style: TextStyle(
-                      color: Colors.green,
-                    ),)
+                    Text(
+                      " .Login nor",
+                      style: TextStyle(
+                        color: Colors.green,
+                      ),
+                    )
                   ],
                 ),
               )
