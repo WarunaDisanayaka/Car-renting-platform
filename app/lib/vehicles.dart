@@ -18,9 +18,9 @@ class _vehiclesState extends State<vehicles> {
       ),
       backgroundColor: Colors.orangeAccent,
       body: Padding(
-        padding: EdgeInsets.only(top: 15, bottom: 8, left: 10, right: 10),
+        padding: EdgeInsets.only(top: 15, bottom: 2, left: 10, right: 10),
         child: Container(
-          height: 200,
+          height: 220,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -29,7 +29,7 @@ class _vehiclesState extends State<vehicles> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 15, bottom: 8, left: 10, right: 10),
+                padding: EdgeInsets.only(top: 15, bottom: 0, left: 10, right: 10),
                 child: Column(
                   children: [
                     Container(
@@ -42,7 +42,7 @@ class _vehiclesState extends State<vehicles> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(top: 15, bottom: 8, left: 10, right: 10),
+                                padding: EdgeInsets.only(top: 15, bottom: 2, left: 10, right: 10),
                                 child: Text(
                                   "Toyota",
                                   style: GoogleFonts.roboto(
@@ -54,7 +54,7 @@ class _vehiclesState extends State<vehicles> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 6, bottom: 8, left: 10, right: 10),
+                                padding: EdgeInsets.only(top: 6, bottom: 2, left: 10, right: 10),
                                 child: Text(
                                     "Corolla 2018 G Grade",
                                     style: GoogleFonts.roboto(
@@ -66,7 +66,7 @@ class _vehiclesState extends State<vehicles> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 6, bottom: 8, left: 10, right: 10),
+                                padding: EdgeInsets.only(top: 6, bottom: 2, left: 10, right: 10),
                                 child: Text(
                                     "RS: 2500  | Per Day",
                                     style: GoogleFonts.roboto(
@@ -93,7 +93,61 @@ class _vehiclesState extends State<vehicles> {
                   ],
                 ),
               ),
-              Text("data"),
+
+              //vehical info bar
+              Padding(
+                padding: EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
+                child: Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.add),
+                          Text("test1"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.add),
+                          Text("test1"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.add),
+                          Text("test1"),
+                        ],
+                      ),
+
+                      OutlinedButton(
+                        child: Text(
+                          "Book",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(
+                            width: 5.0, // set the border weight to 2.0
+                            color: Colors.green,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          fixedSize: Size(100, 40),
+                        ),
+                        onPressed: () {
+
+                        },
+                      ),
+
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
