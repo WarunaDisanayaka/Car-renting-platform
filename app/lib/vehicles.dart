@@ -17,75 +17,85 @@ class _vehiclesState extends State<vehicles> {
         title: Text('Select'),
       ),
       backgroundColor: Colors.orangeAccent,
-      body: Container(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 15, bottom: 8, left: 10, right: 10),
-              child: Container(
-                height: 150,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      body: Padding(
+        padding: EdgeInsets.only(top: 15, bottom: 8, left: 10, right: 10),
+        child: Container(
+          height: 200,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 15, bottom: 8, left: 10, right: 10),
+                child: Column(
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 15, bottom: 8, left: 10, right: 10),
-                          child: Text(
-                            "Toyota",
-                            style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w800,
-                                ),)
+                    Container(
+                      height: 150,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 15, bottom: 8, left: 10, right: 10),
+                                child: Text(
+                                  "Toyota",
+                                  style: GoogleFonts.roboto(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w800,
+                                      ),)
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 6, bottom: 8, left: 10, right: 10),
+                                child: Text(
+                                    "Corolla 2018 G Grade",
+                                    style: GoogleFonts.roboto(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400,
+                                      ),)
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 6, bottom: 8, left: 10, right: 10),
+                                child: Text(
+                                    "RS: 2500  | Per Day",
+                                    style: GoogleFonts.roboto(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w800,
+                                      ),)
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 6, bottom: 8, left: 10, right: 10),
-                          child: Text(
-                              "Corolla 2018 G Grade",
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
-                                ),)
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image(
+                              image: AssetImage(
+                                'assets/v1.png',
+                              ),
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 6, bottom: 8, left: 10, right: 10),
-                          child: Text(
-                              "RS: 2500  | Per Day",
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w800,
-                                ),)
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image(
-                        image: AssetImage(
-                          'assets/v1.png',
-                        ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-            )
-          ],
+              Text("data"),
+            ],
+          ),
         ),
       ),
     );
