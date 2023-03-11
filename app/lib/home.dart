@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -280,7 +281,84 @@ class _homeState extends State<home> {
                   scrollDirection: Axis.horizontal,
                 ),
               ),
-            )
+            ),
+
+
+
+
+            Padding(
+              padding: EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
+              child: Text(
+                "Hot Deals",
+                style: GoogleFonts.roboto(
+                  textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.green,
+                ),
+                height: 100,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Available Vehicles",
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "Available Vehicles Available Vehicles",
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: 60,
+                width: 60,
+                child: Icon(Icons.arrow_forward),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+
+
 
           ],
         ),
