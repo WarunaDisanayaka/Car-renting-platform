@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -12,6 +13,8 @@ class home extends StatefulWidget {
 
 String txt = "2023/03/03";
 TextEditingController _controller = TextEditingController(text: txt);
+
+
 
 class _homeState extends State<home> {
   @override
@@ -184,15 +187,54 @@ class _homeState extends State<home> {
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Container(
                   decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(3)),
+                      color: Colors.white,
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(3)),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
+                      controller: _controller,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Address, address2',
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.add),
+                          onPressed: () {
+                            // handle the tap event
+                            print('Icon tapped!');
+                            showCupertinoModalPopup(
+                              context: context,
+                              builder: (context) {
+                                return Container(
+                                  height:
+                                  MediaQuery.of(context).size.height * 0.36,
+                                  decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(40.0),
+                                      topRight: Radius.circular(40.0),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Done'),
+                                      ),
+                                      Expanded(
+                                        child: CupertinoDatePicker(
+                                          onDateTimeChanged: (date) {},
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        hintText: '2023/03/20',
                       ),
                     ),
                   ),

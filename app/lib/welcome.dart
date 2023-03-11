@@ -1,4 +1,5 @@
 import 'package:cr_app/login.dart';
+import 'package:cr_app/map.dart';
 import 'package:cr_app/register.dart';
 import 'package:flutter/material.dart';
 
@@ -92,7 +93,7 @@ class _welcomeState extends State<welcome> {
                           ),
                           onPressed: () {
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => register()));
+                                MaterialPageRoute(builder: (context) => MapSample()));
                           },
                         ),
                       ),
