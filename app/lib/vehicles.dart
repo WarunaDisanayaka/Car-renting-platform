@@ -48,7 +48,7 @@ class _vehiclesState extends State<vehicles> {
                                     style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w800,
                                       ),
                                     )),
@@ -60,19 +60,19 @@ class _vehiclesState extends State<vehicles> {
                                     style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     )),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(
-                                    top: 6, bottom: 2, left: 10, right: 10),
+                                    top: 6, bottom: 0, left: 10, right: 10),
                                 child: Text("RS: 2500  | Per Day",
                                     style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w800,
                                       ),
                                     )),
@@ -80,7 +80,8 @@ class _vehiclesState extends State<vehicles> {
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.only(
+                                top: 6, bottom: 5, left: 0, right: 0),
                             child: Flexible(
                               child: Image(
                                 image: AssetImage(
@@ -106,20 +107,29 @@ class _vehiclesState extends State<vehicles> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.add),
-                          Text("test1"),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 2),
+                            child: Icon(Icons.analytics),
+                          ),
+                          Text("Petrol"),
                         ],
                       ),
                       Row(
                         children: [
-                          Icon(Icons.add),
-                          Text("test1"),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 2),
+                            child: Icon(Icons.auto_mode),
+                          ),
+                          Text("Auto"),
                         ],
                       ),
                       Row(
                         children: [
-                          Icon(Icons.add),
-                          Text("test1"),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 2),
+                            child: Icon(Icons.event_seat_sharp),
+                          ),
+                          Text("4 Seats"),
                         ],
                       ),
                       OutlinedButton(
