@@ -1,3 +1,4 @@
+import 'package:cr_app/vehicles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -24,7 +25,7 @@ class _homeState extends State<home> {
         backgroundColor: Colors.green,
         title: Text('Select'),
       ),
-      backgroundColor: Colors.yellow[800],
+      backgroundColor: Colors.orangeAccent,
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -386,14 +387,21 @@ class _homeState extends State<home> {
 
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
+                child: GestureDetector(
+                  onTap: (){
+                    print("clicked");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => vehicles()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    height: 50,
+                    width: 50,
+                    child: Icon(Icons.arrow_forward),
                   ),
-                  height: 50,
-                  width: 50,
-                  child: Icon(Icons.arrow_forward),
                 ),
               ),
             ],
