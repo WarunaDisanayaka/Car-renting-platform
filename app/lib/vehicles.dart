@@ -19,6 +19,18 @@ class _vehiclesState extends State<vehicles> {
       body: Container(
         child: Column(
           children: [
+            Padding(
+              padding: EdgeInsets.only(top: 15, bottom: 8, left: 10, right: 10),
+              child: Container(
+                height: 100,
+                decoration: BoxDecoration(
+                  color:Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+
+
+              ),
+            )
 
           ],
         ),
