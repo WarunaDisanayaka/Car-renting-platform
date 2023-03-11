@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class vehicles extends StatefulWidget {
   const vehicles({Key? key}) : super(key: key);
@@ -22,16 +23,68 @@ class _vehiclesState extends State<vehicles> {
             Padding(
               padding: EdgeInsets.only(top: 15, bottom: 8, left: 10, right: 10),
               child: Container(
-                height: 100,
+                height: 150,
                 decoration: BoxDecoration(
-                  color:Colors.white,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
-
-
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(top: 15, bottom: 8, left: 10, right: 10),
+                          child: Text(
+                            "Toyota",
+                            style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                ),)
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 6, bottom: 8, left: 10, right: 10),
+                          child: Text(
+                              "Corolla 2018 G Grade",
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                ),)
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 6, bottom: 8, left: 10, right: 10),
+                          child: Text(
+                              "RS: 2500  | Per Day",
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                ),)
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image(
+                        image: AssetImage(
+                          'assets/v1.png',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
-
           ],
         ),
       ),
