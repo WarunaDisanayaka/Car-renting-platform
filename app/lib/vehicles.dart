@@ -25,11 +25,11 @@ class _vehiclesState extends State<vehicles> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
           ),
-
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 15, bottom: 0, left: 10, right: 10),
+                padding:
+                    EdgeInsets.only(top: 15, bottom: 0, left: 10, right: 10),
                 child: Column(
                   children: [
                     Container(
@@ -42,48 +42,50 @@ class _vehiclesState extends State<vehicles> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(top: 15, bottom: 2, left: 10, right: 10),
-                                child: Text(
-                                  "Toyota",
-                                  style: GoogleFonts.roboto(
+                                padding: EdgeInsets.only(
+                                    top: 15, bottom: 2, left: 10, right: 10),
+                                child: Text("Toyota",
+                                    style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
                                         fontWeight: FontWeight.w800,
-                                      ),)
-                                ),
+                                      ),
+                                    )),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 6, bottom: 2, left: 10, right: 10),
-                                child: Text(
-                                    "Corolla 2018 G Grade",
+                                padding: EdgeInsets.only(
+                                    top: 6, bottom: 2, left: 10, right: 10),
+                                child: Text("Corolla 2018 G Grade",
                                     style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w400,
-                                      ),)
-                                ),
+                                      ),
+                                    )),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 6, bottom: 2, left: 10, right: 10),
-                                child: Text(
-                                    "RS: 2500  | Per Day",
+                                padding: EdgeInsets.only(
+                                    top: 6, bottom: 2, left: 10, right: 10),
+                                child: Text("RS: 2500  | Per Day",
                                     style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
                                         fontWeight: FontWeight.w800,
-                                      ),)
-                                ),
+                                      ),
+                                    )),
                               ),
                             ],
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Image(
-                              image: AssetImage(
-                                'assets/v1.png',
+                            child: Flexible(
+                              child: Image(
+                                image: AssetImage(
+                                  'assets/v1.png',
+                                ),
                               ),
                             ),
                           ),
@@ -96,7 +98,8 @@ class _vehiclesState extends State<vehicles> {
 
               //vehical info bar
               Padding(
-                padding: EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
+                padding:
+                    EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
                 child: Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,7 +122,6 @@ class _vehiclesState extends State<vehicles> {
                           Text("test1"),
                         ],
                       ),
-
                       OutlinedButton(
                         child: Text(
                           "Book",
@@ -139,11 +141,8 @@ class _vehiclesState extends State<vehicles> {
                           ),
                           fixedSize: Size(100, 40),
                         ),
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                       ),
-
                     ],
                   ),
                 ),
