@@ -165,6 +165,38 @@ class _homeState extends State<home> {
               ),
             ),
 
+
+            //location
+            Padding(
+              padding: EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
+              child: Text(
+                "Select location ",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Container(
+                decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(3)),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Address, address2',
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
             Padding(
               padding: EdgeInsets.only(top: 20, bottom: 8, left: 150, right: 5),
               child: OutlinedButton(
@@ -193,55 +225,60 @@ class _homeState extends State<home> {
               ),
             ),
 
-            Text("test"),
 
-            CarouselSlider(
-              items: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    color: Colors.red,
-                    child: Center(
-                      child: Text("Item 1", style: TextStyle(color: Colors.white, fontSize: 24)),
+
+            //CarouselSlider
+
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: CarouselSlider(
+                items: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      color: Colors.red,
+                      child: Center(
+                        child: Text("Item 1", style: TextStyle(color: Colors.white, fontSize: 24)),
+                      ),
                     ),
                   ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    color: Colors.blue,
-                    child: Center(
-                      child: Text("Item 2", style: TextStyle(color: Colors.white, fontSize: 24)),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      color: Colors.blue,
+                      child: Center(
+                        child: Text("Item 2", style: TextStyle(color: Colors.white, fontSize: 24)),
+                      ),
                     ),
                   ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    color: Colors.green,
-                    child: Center(
-                      child: Text("Item 3", style: TextStyle(color: Colors.white, fontSize: 24)),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      color: Colors.green,
+                      child: Center(
+                        child: Text("Item 3", style: TextStyle(color: Colors.white, fontSize: 24)),
+                      ),
                     ),
                   ),
+                ],
+                options: CarouselOptions(
+                  height: 200,
+                  aspectRatio: 16/9,
+                  viewportFraction: 0.9,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enlargeCenterPage: true,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                    });
+                  },
+                  scrollDirection: Axis.horizontal,
                 ),
-              ],
-              options: CarouselOptions(
-                height: 200,
-                aspectRatio: 16/9,
-                viewportFraction: 0.9,
-                initialPage: 0,
-                enableInfiniteScroll: true,
-                reverse: false,
-                autoPlay: true,
-                autoPlayInterval: Duration(seconds: 3),
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
-                autoPlayCurve: Curves.fastOutSlowIn,
-                enlargeCenterPage: true,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                  });
-                },
-                scrollDirection: Axis.horizontal,
               ),
             )
 
