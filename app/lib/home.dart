@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -191,6 +192,59 @@ class _homeState extends State<home> {
                 },
               ),
             ),
+
+            Text("test"),
+
+            CarouselSlider(
+              items: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    color: Colors.red,
+                    child: Center(
+                      child: Text("Item 1", style: TextStyle(color: Colors.white, fontSize: 24)),
+                    ),
+                  ),
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    color: Colors.blue,
+                    child: Center(
+                      child: Text("Item 2", style: TextStyle(color: Colors.white, fontSize: 24)),
+                    ),
+                  ),
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    color: Colors.green,
+                    child: Center(
+                      child: Text("Item 3", style: TextStyle(color: Colors.white, fontSize: 24)),
+                    ),
+                  ),
+                ),
+              ],
+              options: CarouselOptions(
+                height: 200,
+                aspectRatio: 16/9,
+                viewportFraction: 0.9,
+                initialPage: 0,
+                enableInfiniteScroll: true,
+                reverse: false,
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 3),
+                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enlargeCenterPage: true,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                  });
+                },
+                scrollDirection: Axis.horizontal,
+              ),
+            )
+
           ],
         ),
       ),
