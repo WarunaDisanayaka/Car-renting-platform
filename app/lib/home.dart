@@ -16,10 +16,15 @@ String txt = "2023/03/03";
 TextEditingController _controller = TextEditingController(text: txt);
 
 List<String> imageList = [
+
   'assets/cr1.jpg',
   'assets/cr2.jpg',
   'assets/cr3.jpg',
 ];
+
+
+
+
 
 
 
@@ -280,58 +285,28 @@ class _homeState extends State<home> {
 
               //CarouselSlider
 
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: CarouselSlider(
-                  items: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        color: Colors.red,
-                        child: Center(
-                          child: Text("Item 1", style: TextStyle(color: Colors.white, fontSize: 24)),
-                        ),
-                      ),
+              CarouselSlider(
+                items: imageList.map((imagePath) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      imagePath,
+                      fit: BoxFit.cover,
+                      width: 400.0,
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        color: Colors.blue,
-                        child: Center(
-                          child: Text("Item 2", style: TextStyle(color: Colors.white, fontSize: 24)),
-                        ),
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        color: Colors.green,
-                        child: Center(
-                          child: Text("Item 3", style: TextStyle(color: Colors.white, fontSize: 24)),
-                        ),
-                      ),
-                    ),
-                  ],
-                  options: CarouselOptions(
-                    height: 200,
-                    aspectRatio: 16/9,
-                    viewportFraction: 0.9,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 3),
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                      });
-                    },
-                    scrollDirection: Axis.horizontal,
-                  ),
+                  );
+                }).toList(),
+                options: CarouselOptions(
+                  autoPlay: true,
+                  aspectRatio: 16/9,
+                  enlargeCenterPage: true,
+                  viewportFraction: 0.8,
                 ),
               ),
+
+
+
+
 
 
 
