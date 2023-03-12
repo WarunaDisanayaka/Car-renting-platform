@@ -34,7 +34,7 @@ class _viewState extends State<view> {
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.black,
+                      color: Colors.black54,
                     ),
                   ),
                   child: Column(
