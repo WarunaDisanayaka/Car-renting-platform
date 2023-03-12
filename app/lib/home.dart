@@ -285,24 +285,47 @@ class _homeState extends State<home> {
 
               //CarouselSlider
 
-              CarouselSlider(
-                items: imageList.map((imagePath) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(
-                      imagePath,
-                      fit: BoxFit.cover,
-                      width: 400.0,
-                    ),
-                  );
-                }).toList(),
-                options: CarouselOptions(
-                  autoPlay: true,
-                  aspectRatio: 16/9,
-                  enlargeCenterPage: true,
-                  viewportFraction: 0.8,
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: CarouselSlider(
+                  items: imageList.map((imagePath) {
+                    return Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(8.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.green.withOpacity(0.6),
+                                spreadRadius: 8,
+                                blurRadius: 9,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.asset(
+                            imagePath,
+                            fit: BoxFit.cover,
+                            width: 430,
+                          ),
+                        ),
+                      ],
+                    );
+                  }).toList(),
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    aspectRatio: 16/6,
+                    enlargeCenterPage: true,
+                    viewportFraction: 0.9,
+                  ),
                 ),
               ),
+
+
 
 
 
