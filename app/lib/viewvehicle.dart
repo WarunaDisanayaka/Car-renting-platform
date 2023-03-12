@@ -21,6 +21,16 @@ class _viewState extends State<view> {
           children: [
             // image CarouselSlider
 
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image(
+                image: AssetImage(
+                  'assets/cr4.jpeg',
+                ),
+              ),
+            ),
+
+            
 
           ],
         ),
