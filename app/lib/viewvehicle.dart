@@ -43,17 +43,13 @@ class _viewState extends State<view> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("data"),
-
-
                           Text("data"),
                         ],
                       )
-
                     ],
                   ),
                 ),
               )
-
             ],
           ),
         ),
