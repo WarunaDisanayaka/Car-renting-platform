@@ -9,6 +9,15 @@ class view extends StatefulWidget {
 class _viewState extends State<view> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(),
+      body: Container(
+        child: Column(
+          children: [
+
+          ],
+        ),
+      ),
+    );
   }
 }
