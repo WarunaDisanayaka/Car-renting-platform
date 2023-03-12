@@ -15,6 +15,12 @@ class home extends StatefulWidget {
 String txt = "2023/03/03";
 TextEditingController _controller = TextEditingController(text: txt);
 
+List<String> imageList = [
+  'assets/cr1.jpg',
+  'assets/cr2.jpg',
+  'assets/cr3.jpg',
+];
+
 
 
 class _homeState extends State<home> {
