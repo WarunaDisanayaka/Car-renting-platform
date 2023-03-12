@@ -16,23 +16,46 @@ class _viewState extends State<view> {
         backgroundColor: Colors.green,
         title: Text('Select'),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            // image CarouselSlider
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          child: Column(
+            children: [
+              // image CarouselSlider
 
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image(
+              Image(
                 image: AssetImage(
                   'assets/cr4.jpeg',
                 ),
               ),
-            ),
 
-            
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("data"),
 
-          ],
+
+                          Text("data"),
+                        ],
+                      )
+
+                    ],
+                  ),
+                ),
+              )
+
+            ],
+          ),
         ),
       ),
     );
