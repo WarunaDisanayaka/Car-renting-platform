@@ -20,21 +20,6 @@ class _viewState extends State<view> {
         child: Column(
           children: [
             // image CarouselSlider
-            CarouselSlider(
-              items: imageList.map((imageUrl) {
-                return Image.network(
-                  imageUrl,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                );
-              }).toList(),
-              options: CarouselOptions(
-                autoPlay: true,
-                aspectRatio: 16/9,
-                enlargeCenterPage: true,
-                viewportFraction: 0.8,
-              ),
-            )
 
 
           ],

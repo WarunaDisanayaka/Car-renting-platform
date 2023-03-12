@@ -21,8 +21,6 @@
 <!--                -->
 <!--              />-->
 
-            <meta-data android:name="com.google.android.geo.API_KEY"
-                android:value="AIzaSyCtx6bmR2VESQ4HjCC9K-3wm8eHRqf9T6Q"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -34,5 +32,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyAKmx5fk17F_7M4FofGxp2Oy8gyRvJ1zZ0"/>
     </application>
 </manifest>
