@@ -1,3 +1,4 @@
+import 'package:cr_app/viewvehicle.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -154,7 +155,10 @@ class _vehiclesState extends State<vehicles> {
                                 ),
                                 fixedSize: Size(100, 40),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context, MaterialPageRoute(builder: (context) => view()));
+                              },
                             ),
                           ],
                         ),
