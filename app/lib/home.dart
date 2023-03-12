@@ -254,7 +254,7 @@ class _homeState extends State<home> {
               ),
 
               Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 8, left: 100, right: 10),
+                padding: EdgeInsets.only(top: 20, bottom: 8, left: 130, right: 10),
                 child: OutlinedButton(
                   child: Text(
                     "Filter",
