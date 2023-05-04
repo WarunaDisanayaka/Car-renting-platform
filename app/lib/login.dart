@@ -11,6 +11,8 @@ class login extends StatefulWidget {
 
 final TextEditingController emailController = TextEditingController();
 final TextEditingController passwordController = TextEditingController();
+String errorMessage = '';
+
 
 
 class _loginState extends State<login> {
@@ -117,24 +119,30 @@ class _loginState extends State<login> {
                       ),
                       fixedSize: Size(150, 50),
                     ),
-                      onPressed: () async {
-                        try {
-                          UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => home()));
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'user-not-found') {
-                            print('No user found for that email.');
-                          } else if (e.code == 'wrong-password') {
-                            print('Wrong password provided for that user.');
-                          }
-                        }
+                    onPressed: () async {
+                      try {
+                        UserCredential userCredential =
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                          email: emailController.text.trim(),
+                          password: passwordController.text.trim(),
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => home()),
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        setState(() {
+                          errorMessage = e.message!;
+                        });
+                      } catch (e) {
+                        print(e);
                       }
+                    },
+
 
                   ),
                 ),
+
 
                 SizedBox(
                   height: 20,
@@ -153,6 +161,19 @@ class _loginState extends State<login> {
                     ),
                   ],
                 ),
+
+                // show error message if present
+                if (errorMessage != null)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      errorMessage!,
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),
