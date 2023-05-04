@@ -39,6 +39,11 @@ dependencies:
   carousel_slider: ^4.0.0
   google_fonts: ^2.1.0
   google_maps_flutter: ^2.2.5
+  firebase_core: ^2.11.0
+  firebase_analytics: ^10.3.0
+  firebase_auth: ^4.5.0
+  cloud_firestore: ^4.6.0
+
 
 dev_dependencies:
   flutter_test:

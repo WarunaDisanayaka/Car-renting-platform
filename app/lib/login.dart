@@ -1,4 +1,5 @@
 import 'package:cr_app/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class login extends StatefulWidget {
@@ -7,6 +8,10 @@ class login extends StatefulWidget {
   @override
   State<login> createState() => _loginState();
 }
+
+final TextEditingController emailController = TextEditingController();
+final TextEditingController passwordController = TextEditingController();
+
 
 class _loginState extends State<login> {
   @override
@@ -56,6 +61,7 @@ class _loginState extends State<login> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
+                        controller: emailController,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Email',
@@ -80,6 +86,7 @@ class _loginState extends State<login> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
+                        controller: passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -110,10 +117,22 @@ class _loginState extends State<login> {
                       ),
                       fixedSize: Size(150, 50),
                     ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => home()));
-                    },
+                      onPressed: () async {
+                        try {
+                          UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => home()));
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            print('No user found for that email.');
+                          } else if (e.code == 'wrong-password') {
+                            print('Wrong password provided for that user.');
+                          }
+                        }
+                      }
+
                   ),
                 ),
 
