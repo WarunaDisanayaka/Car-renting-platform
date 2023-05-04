@@ -36,7 +36,7 @@ class _homeState extends State<home> {
         backgroundColor: Colors.green,
         title: Text('Select'),
       ),
-      backgroundColor: Colors.orangeAccent,
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -59,7 +59,7 @@ class _homeState extends State<home> {
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      border: Border.all(color: Colors.white),
+                      border: Border.all(color: Colors.black),
                       borderRadius: BorderRadius.circular(3)),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
@@ -79,10 +79,10 @@ class _homeState extends State<home> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.36,
                                   decoration: BoxDecoration(
-                                    color: Colors.green,
+                                    color: Colors.white,
                                     borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(40.0),
-                                      topRight: Radius.circular(40.0),
+                                      topLeft: Radius.circular(20.0),
+                                      topRight: Radius.circular(20.0),
                                     ),
                                   ),
                                   child: Column(
@@ -129,7 +129,7 @@ class _homeState extends State<home> {
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      border: Border.all(color: Colors.white),
+                      border: Border.all(color: Colors.black),
                       borderRadius: BorderRadius.circular(3)),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
@@ -149,10 +149,10 @@ class _homeState extends State<home> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.36,
                                   decoration: BoxDecoration(
-                                    color: Colors.green,
+                                    color: Colors.white,
                                     borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(40.0),
-                                      topRight: Radius.circular(40.0),
+                                      topLeft: Radius.circular(20.0),
+                                      topRight: Radius.circular(20.0),
                                     ),
                                   ),
                                   child: Column(
@@ -200,7 +200,7 @@ class _homeState extends State<home> {
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      border: Border.all(color: Colors.white),
+                      border: Border.all(color: Colors.black),
                       borderRadius: BorderRadius.circular(3)),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
@@ -259,18 +259,19 @@ class _homeState extends State<home> {
                   child: Text(
                     "Filter",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                     ),
                   ),
                   style: OutlinedButton.styleFrom(
+                    backgroundColor: Colors.black,
                     side: BorderSide(
-                      width: 5.0, // set the border weight to 2.0
-                      color: Colors.green,
+                      width: 1.0, // set the border weight to 2.0
+                      color: Colors.white,
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                     fixedSize: Size(150, 50),
                   ),
