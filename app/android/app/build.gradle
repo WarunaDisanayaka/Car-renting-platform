@@ -71,4 +71,11 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:32.0.0')
 }
 
-apply plugin: id 'com.google.gms.google-services'
+plugins {
+    id 'com.android.application'
+
+    // Add the Google services Gradle plugin
+    id 'com.google.gms.google-services'
+
+
+}
