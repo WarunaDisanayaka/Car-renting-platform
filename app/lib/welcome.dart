@@ -14,7 +14,7 @@ class _welcomeState extends State<welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow[800],
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           child: Column(
@@ -93,7 +93,7 @@ class _welcomeState extends State<welcome> {
                           ),
                           onPressed: () {
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => MapSample()));
+                                MaterialPageRoute(builder: (context) => register()));
                           },
                         ),
                       ),

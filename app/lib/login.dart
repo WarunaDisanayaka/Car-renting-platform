@@ -35,7 +35,7 @@ class _loginState extends State<login> {
           child: SizedBox(),
         ),
       ),
-      backgroundColor: Colors.yellow[800],
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           child: SingleChildScrollView(
@@ -58,8 +58,8 @@ class _loginState extends State<login> {
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12)),
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(8)),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
@@ -83,8 +83,8 @@ class _loginState extends State<login> {
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12)),
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(8)),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
@@ -162,10 +162,11 @@ class _loginState extends State<login> {
                   ],
                 ),
 
+                SizedBox(height: 20,),
                 // show error message if present
                 if (errorMessage != null)
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Text(
                       errorMessage!,
                       style: TextStyle(
