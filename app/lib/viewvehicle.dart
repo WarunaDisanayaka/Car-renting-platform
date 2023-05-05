@@ -14,12 +14,20 @@ class _ViewState extends State<view> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: Text(widget.product["brand"] ?? ""),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
+            Image(
+              image: AssetImage(
+                'assets/cr4.jpeg',
+              ),
+            ),
+
+
             Text(
               widget.product["model"] ?? "",
               style: TextStyle(
@@ -65,3 +73,5 @@ class _ViewState extends State<view> {
     );
   }
 }
+
+
