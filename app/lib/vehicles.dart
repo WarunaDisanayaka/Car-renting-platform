@@ -26,9 +26,45 @@ class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(47, 114, 100, 1),
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text("Vehicle List"),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        title: Text('Available Vehicle'),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(47, 114, 100, 1),
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('My Account'),
+              onTap: () {
+                // Handle navigation to the home screen
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                // Handle navigation to the settings screen
+              },
+            ),
+          ],
+        ),
       ),
       body: productList.isEmpty
           ? Center(child: CircularProgressIndicator())
