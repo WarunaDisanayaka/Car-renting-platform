@@ -1,57 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class view extends StatefulWidget {
-  const view({Key? key}) : super(key: key);
+  final Map<dynamic, dynamic> product;
+
+  const view({Key? key, required this.product}) : super(key: key);
 
   @override
-  State<view> createState() => _viewState();
+  _ViewState createState() => _ViewState();
 }
 
-class _viewState extends State<view> {
+class _ViewState extends State<view> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text('Select'),
+        title: Text(widget.product["brand"] ?? ""),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          child: Column(
-            children: [
-              // image CarouselSlider
-
-              Image(
-                image: AssetImage(
-                  'assets/cr4.jpeg',
-                ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              widget.product["model"] ?? "",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
-
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black54,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("data"),
-                          Text("data"),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              "RS: ${widget.product["price"] ?? ""}  | Per Day",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              "Fuel Type: ${widget.product["fuelType"] ?? ""}",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              "Seats: ${widget.product["seats"] ?? ""}",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              "Transmission: ${widget.product["transmission"] ?? ""}",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ],
         ),
       ),
     );

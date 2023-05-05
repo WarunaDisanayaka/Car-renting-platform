@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cr_app/viewvehicle.dart';
 
 class ProductList extends StatefulWidget {
   @override
@@ -183,7 +184,14 @@ class _ProductListState extends State<ProductList> {
                               ),
                               fixedSize: Size(100, 40),
                             ),
-                            onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => view(product: product),
+                                  ),
+                                );
+                              }
                           ),
                         ],
                       ),
