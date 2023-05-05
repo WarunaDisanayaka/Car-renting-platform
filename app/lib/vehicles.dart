@@ -17,7 +17,7 @@ class _vehiclesState extends State<vehicles> {
         backgroundColor: Colors.green,
         title: Text('Select'),
       ),
-      backgroundColor: Colors.orangeAccent,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.only(top: 15, bottom: 2, left: 10, right: 10),
         child: SingleChildScrollView(
@@ -27,6 +27,7 @@ class _vehiclesState extends State<vehicles> {
                 height: 220,
                 decoration: BoxDecoration(
                   color: Colors.white,
+                  border: Border.all(color: Colors.black),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -176,6 +177,7 @@ class _vehiclesState extends State<vehicles> {
                 child: Container(
                   height: 220,
                   decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -326,6 +328,7 @@ class _vehiclesState extends State<vehicles> {
                 child: Container(
                   height: 220,
                   decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -478,6 +481,7 @@ class _vehiclesState extends State<vehicles> {
                 child: Container(
                   height: 220,
                   decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
