@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -15,13 +16,15 @@ final TextEditingController _passwordController = TextEditingController();
 final TextEditingController _usernameController = TextEditingController();
 final TextEditingController _telNoController = TextEditingController();
 final TextEditingController _addressController = TextEditingController();
+String errorMessage = '';
 
-Future<void> registerWithEmailAndPassword(String email, String password) async {
+Future<void> registerWithEmailAndPassword(String email, String password ,String uname) async {
   try {
-    await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    await _auth.createUserWithEmailAndPassword(email: email, password: password,);
     // Navigate to the next screen after successful registration
   } catch (e) {
     print('Error: $e');
+
   }
 }
 
@@ -68,12 +71,21 @@ class _registerState extends State<register> {
                         borderRadius: BorderRadius.circular(8)),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
+                      child: TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Email',
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          if (!EmailValidator.validate(value)) {
+                            return 'Please enter a valid email';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ),
@@ -194,15 +206,24 @@ class _registerState extends State<register> {
                       ),
                       fixedSize: Size(150, 50),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       final String email = _emailController.text.trim();
                       final String password = _passwordController.text.trim();
-                      registerWithEmailAndPassword(email, password);
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => register()));
+                      final String uname = _usernameController.text.trim();
+                      try {
+                        await registerWithEmailAndPassword(email, password, uname);
+                        // Navigate to the next screen on successful registration
+                      }  on FirebaseAuthException catch (er) {
+                        setState(() {
+                          errorMessage = er.message!;
+                        });
+                      } catch (e) {
+                        print(e);
+                      }
                     },
                   ),
                 ),
+
 
                 Padding(
                   padding: const EdgeInsets.all(14.0),
@@ -218,7 +239,22 @@ class _registerState extends State<register> {
                       )
                     ],
                   ),
-                )
+                ),
+
+                if (errorMessage != null)
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      errorMessage!,
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+
+
+
               ],
             ),
           ),
