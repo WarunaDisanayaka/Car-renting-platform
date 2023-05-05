@@ -396,7 +396,7 @@ class _homeState extends State<home> {
                   onTap: (){
                     print("clicked");
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => vehicles()));
+                        MaterialPageRoute(builder: (context) => ProductList()));
                   },
                   child: Container(
                     decoration: BoxDecoration(
