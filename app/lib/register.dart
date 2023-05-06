@@ -19,17 +19,55 @@ final TextEditingController _telNoController = TextEditingController();
 final TextEditingController _addressController = TextEditingController();
 String errorMessage = '';
 
-Future<void> registerWithEmailAndPassword(String email, String password ,String uname, String telNo, String address) async {
+Future<void> registerWithEmailAndPassword(BuildContext context, String email, String password, String uname) async {
+  String errorMessage = '';
   try {
     await _auth.createUserWithEmailAndPassword(email: email, password: password);
-    String uid = _auth.currentUser!.uid; // get the user id
-    // Create a new document for the user with the uid as the document id
-    await FirebaseFirestore.instance.collection('users').doc(uid).set({
-      'username': uname,
-      'telephone': telNo,
-      'address': address,
-    });
-    // Navigate to the next screen after successful registration
+    // Show a success message
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Registration Successful"),
+          content: Text("You have been registered successfully!"),
+          actions: [
+            TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'weak-password') {
+      errorMessage = 'The password provided is too weak.';
+    } else if (e.code == 'email-already-in-use') {
+      errorMessage = 'The account already exists for that email.';
+    } else {
+      errorMessage = e.message!;
+    }
+    // Show an error message
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Registration Failed"),
+          content: Text(errorMessage),
+          actions: [
+            TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   } catch (e) {
     print('Error: $e');
   }
@@ -220,10 +258,34 @@ class _registerState extends State<register> {
                       final String email = _emailController.text.trim();
                       final String password = _passwordController.text.trim();
                       final String uname = _usernameController.text.trim();
-                      final String telNo = _telNoController.text.trim();
-                      final String address = _addressController.text.trim();
-                      await registerWithEmailAndPassword(email, password, uname, telNo, address);
+                      if (_emailController.text.isEmpty ||
+                          _passwordController.text.isEmpty ||
+                          _usernameController.text.isEmpty ||
+                          _telNoController.text.isEmpty ||
+                          _addressController.text.isEmpty) {
+                        // Show an error message if any of the fields are empty
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("Registration Failed"),
+                              content: Text("Please fill in all the fields."),
+                              actions: [
+                                TextButton(
+                                  child: Text("OK"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                        await registerWithEmailAndPassword(context, email, password, uname);
+                      }
                     },
+
                   ),
                 ),
 
