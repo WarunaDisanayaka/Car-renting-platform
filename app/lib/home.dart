@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:intl/intl.dart';
 
 import 'package:cr_app/vehicles.dart';
 import 'package:cr_app/viewvehicle.dart';
@@ -18,6 +19,8 @@ class home extends StatefulWidget {
 }
 
 String txt = "2023/03/03";
+String selectedDateTime = '';
+String selectedDateTime2 = '';
 TextEditingController _controller = TextEditingController(text: txt);
 String _selectedLocationName = '';
 
@@ -120,21 +123,18 @@ class homeState extends State<home> {
                       borderRadius: BorderRadius.circular(3)),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
-                    child: TextField(
-                      // controller: _controller,
+                    child:
+                    TextField(
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         suffixIcon: IconButton(
                           icon: Icon(Icons.add),
                           onPressed: () {
-                            // handle the tap event
-                            print('Icon tapped!');
                             showCupertinoModalPopup(
                               context: context,
                               builder: (context) {
                                 return Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.36,
+                                  height: MediaQuery.of(context).size.height * 0.36,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.only(
@@ -152,9 +152,15 @@ class homeState extends State<home> {
                                       ),
                                       Expanded(
                                         child: CupertinoDatePicker(
-                                          onDateTimeChanged: (date) {},
+                                          mode: CupertinoDatePickerMode.date,
+                                          onDateTimeChanged: (DateTime dateTime) {
+                                            setState(() {
+                                              selectedDateTime =
+                                                  DateFormat.yMd().format(dateTime).toString();
+                                            });
+                                          },
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 );
@@ -162,8 +168,9 @@ class homeState extends State<home> {
                             );
                           },
                         ),
-                        hintText: '2023/03/20',
+                        hintText: 'YYYY/MM/DD',
                       ),
+                      controller: TextEditingController(text: selectedDateTime),
                     ),
                   ),
                 ),
@@ -222,8 +229,14 @@ class homeState extends State<home> {
                                         child: Text('Done'),
                                       ),
                                       Expanded(
-                                        child: CupertinoDatePicker(
-                                          onDateTimeChanged: (date) {},
+                                        child:CupertinoDatePicker(
+                                          mode: CupertinoDatePickerMode.date,
+                                          onDateTimeChanged: (DateTime dateTime) {
+                                            setState(() {
+                                              selectedDateTime2 =
+                                                  DateFormat.yMd().format(dateTime).toString();
+                                            });
+                                          },
                                         ),
                                       )
                                     ],
@@ -233,8 +246,9 @@ class homeState extends State<home> {
                             );
                           },
                         ),
-                        hintText: '2023/03/20',
+                        hintText: 'YYYY/MM/DD',
                       ),
+                      controller: TextEditingController(text: selectedDateTime2),
                     ),
                   ),
                 ),
@@ -317,7 +331,7 @@ class homeState extends State<home> {
                             );
                           },
                         ),
-                        hintText: '2023/03/20',
+                        hintText: 'Pic Address , ',
                       ),
                     ),
                   ),
