@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:cr_app/vehicles.dart';
 import 'package:cr_app/viewvehicle.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geocoding/geocoding.dart';
+
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -17,6 +20,9 @@ class home extends StatefulWidget {
 
 String txt = "2023/03/03";
 TextEditingController _controller = TextEditingController(text: txt);
+String _selectedLocationName = '';
+
+
 
 List<String> imageList = [
   'assets/cr1.jpg',
@@ -24,20 +30,67 @@ List<String> imageList = [
   'assets/cr3.jpg',
 ];
 
+final TextEditingController _locationController = TextEditingController();
+
+
 class homeState extends State<home> {
   final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
+  Completer<GoogleMapController>();
+
+  //new added
+  static const LatLng _initialCameraPosition = LatLng(6.927079, 79.861244);
+  Set<Marker> _markers = Set<Marker>();
+  late GoogleMapController _mapController;
+  LatLng? _pickedLocation;
+
+  void _onMapCreated(GoogleMapController controller) {
+    _controller.complete(controller);
+    _mapController = controller;
+  }
+
+  void _pickLocation(LatLng position) {
+    setState(() {
+      _pickedLocation = position;
+      _markers.clear();
+      _markers.add(Marker(
+        markerId: MarkerId('picked-location'),
+        position: _pickedLocation!,
+
+      ));
+      _locationController.text = '${_pickedLocation!.latitude}, ${_pickedLocation!.longitude}';
+    });
+  }
+
+
+  void _searchLocation() {
+    if (_pickedLocation != null) {
+      // Use the picked location for search
+      print(
+          'Search location: ${_pickedLocation!.latitude}, ${_pickedLocation!.longitude}');
+    } else {
+      // Use the initial location for search
+      print(
+          'Search location: ${_initialCameraPosition.latitude}, ${_initialCameraPosition.longitude}');
+    }
+  }
+
+
+
+
+
+  //end new
 
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    target: LatLng(6.927079, 79.861244),
+    zoom: 10.4746,
   );
 
   static const CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
+      target: LatLng(6.902820, 79.861244),
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
+
 
   @override
   Widget build(BuildContext context) {
@@ -199,7 +252,7 @@ class homeState extends State<home> {
             padding:
             EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
             child: Text(
-              "Select END Date ",
+              "Select Location ",
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w800,
@@ -217,7 +270,7 @@ class homeState extends State<home> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: TextField(
-                  // controller: _controller,
+                  controller: _locationController,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     suffixIcon: IconButton(
@@ -229,8 +282,7 @@ class homeState extends State<home> {
                           context: context,
                           builder: (context) {
                             return Container(
-                              height:
-                              MediaQuery.of(context).size.height * 0.46,
+                              height: MediaQuery.of(context).size.height * 0.46,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.only(
@@ -246,27 +298,24 @@ class homeState extends State<home> {
                                     },
                                     child: Text('Done'),
                                   ),
-
                                   Expanded(
                                     child: GoogleMap(
-                                      mapType: MapType.normal,
-                                      initialCameraPosition: _kGooglePlex,
-                                      onMapCreated: (GoogleMapController controller) {
-                                        _controller.complete(controller);
-                                      },
+                                      onMapCreated: _onMapCreated,
+                                      initialCameraPosition: CameraPosition(
+                                        target: _initialCameraPosition,
+                                        zoom: 11.0,
+                                      ),
+                                      markers: _markers,
+                                      onTap: _pickLocation,
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: TextButton(
-                                      onPressed: _goToTheLake,
-                                      child: Text('Go to the lake!'),
+                                    child: ElevatedButton(
+                                      onPressed: _searchLocation,
+                                      child: Text('Search'),
                                     ),
                                   ),
-
-
-
-
                                 ],
                               ),
                             );
@@ -411,10 +460,6 @@ class homeState extends State<home> {
     );
   }
 
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  }
 
 }
 
