@@ -10,7 +10,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
 
-
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
 
@@ -22,8 +21,6 @@ String txt = "2023/03/03";
 TextEditingController _controller = TextEditingController(text: txt);
 String _selectedLocationName = '';
 
-
-
 List<String> imageList = [
   'assets/cr1.jpg',
   'assets/cr2.jpg',
@@ -32,10 +29,9 @@ List<String> imageList = [
 
 final TextEditingController _locationController = TextEditingController();
 
-
 class homeState extends State<home> {
   final Completer<GoogleMapController> _controller =
-  Completer<GoogleMapController>();
+      Completer<GoogleMapController>();
 
   //new added
   static const LatLng _initialCameraPosition = LatLng(6.927079, 79.861244);
@@ -48,19 +44,21 @@ class homeState extends State<home> {
     _mapController = controller;
   }
 
-  void _pickLocation(LatLng position) {
+  void _pickLocation(LatLng position) async {
+    List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+    Placemark placemark = placemarks[0];
+    String address = placemark.street! + ", " + placemark.subLocality! + ", " + placemark.locality! + ", " + placemark.administrativeArea! + ", " + placemark.country!;
+
     setState(() {
       _pickedLocation = position;
       _markers.clear();
       _markers.add(Marker(
         markerId: MarkerId('picked-location'),
         position: _pickedLocation!,
-
       ));
-      _locationController.text = '${_pickedLocation!.latitude}, ${_pickedLocation!.longitude}';
+      _locationController.text = address;
     });
   }
-
 
   void _searchLocation() {
     if (_pickedLocation != null) {
@@ -74,10 +72,6 @@ class homeState extends State<home> {
     }
   }
 
-
-
-
-
   //end new
 
   static const CameraPosition _kGooglePlex = CameraPosition(
@@ -90,7 +84,6 @@ class homeState extends State<home> {
       target: LatLng(6.902820, 79.861244),
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
-
 
   @override
   Widget build(BuildContext context) {
@@ -248,87 +241,88 @@ class homeState extends State<home> {
               ),
 
               //location
-          Padding(
-            padding:
-            EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
-            child: Text(
-              "Select Location ",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(3)),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: TextField(
-                  controller: _locationController,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: () {
-                        // handle the tap event
-                        print('Icon tapped!');
-                        showCupertinoModalPopup(
-                          context: context,
-                          builder: (context) {
-                            return Container(
-                              height: MediaQuery.of(context).size.height * 0.46,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20.0),
-                                  topRight: Radius.circular(20.0),
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Done'),
-                                  ),
-                                  Expanded(
-                                    child: GoogleMap(
-                                      onMapCreated: _onMapCreated,
-                                      initialCameraPosition: CameraPosition(
-                                        target: _initialCameraPosition,
-                                        zoom: 11.0,
-                                      ),
-                                      markers: _markers,
-                                      onTap: _pickLocation,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: ElevatedButton(
-                                      onPressed: _searchLocation,
-                                      child: Text('Search'),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                    hintText: '2023/03/20',
+              Padding(
+                padding:
+                    EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
+                child: Text(
+                  "Select Location ",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
               ),
-            ),
-          ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(3)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      controller: _locationController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.add),
+                          onPressed: () {
+                            // handle the tap event
+                            print('Icon tapped!');
+                            showCupertinoModalPopup(
+                              context: context,
+                              builder: (context) {
+                                return Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.46,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20.0),
+                                      topRight: Radius.circular(20.0),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Done'),
+                                      ),
+                                      Expanded(
+                                        child: GoogleMap(
+                                          onMapCreated: _onMapCreated,
+                                          initialCameraPosition: CameraPosition(
+                                            target: _initialCameraPosition,
+                                            zoom: 11.0,
+                                          ),
+                                          markers: _markers,
+                                          onTap: _pickLocation,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+                                          onPressed: _searchLocation,
+                                          child: Text('Search'),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        hintText: '2023/03/20',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
 
               //CarouselSlider
 
@@ -459,7 +453,4 @@ class homeState extends State<home> {
       ),
     );
   }
-
-
 }
-
