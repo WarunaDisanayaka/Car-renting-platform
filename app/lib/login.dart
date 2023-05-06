@@ -1,4 +1,5 @@
 import 'package:cr_app/home.dart';
+import 'package:cr_app/vehicles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -128,7 +129,7 @@ class _loginState extends State<login> {
                         );
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => home()),
+                          MaterialPageRoute(builder: (context) => ProductList()),
                         );
                       } on FirebaseAuthException catch (e) {
                         setState(() {

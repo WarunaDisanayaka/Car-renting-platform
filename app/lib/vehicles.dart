@@ -7,6 +7,13 @@ class ProductList extends StatefulWidget {
   _ProductListState createState() => _ProductListState();
 
 }
+List<String> imageList = [
+
+  'assets/cr1.jpg',
+  'assets/cr2.jpg',
+  'assets/cr3.jpg',
+];
+
 
 class _ProductListState extends State<ProductList> {
   final databaseReference = FirebaseFirestore.instance;
@@ -83,6 +90,7 @@ class _ProductListState extends State<ProductList> {
               ),
               child: Column(
                 children: [
+
                   Padding(
                     padding: EdgeInsets.only(
                         top: 15, bottom: 0, left: 10, right: 10),
@@ -148,12 +156,13 @@ class _ProductListState extends State<ProductList> {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(
-                                    top: 6, bottom: 5, left: 0, right: 0),
+                                    top: 6, bottom: 5, left: 0, right: 20),
                                 child: Flexible(
                                   child: Image(
                                     image: AssetImage(
                                       'assets/v1.png',
                                     ),
+                                    height: 100,
                                   ),
                                 ),
                               ),

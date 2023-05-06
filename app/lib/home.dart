@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:cr_app/vehicles.dart';
+import 'package:cr_app/viewvehicle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -9,31 +12,38 @@ class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
 
   @override
-  State<home> createState() => _homeState();
+  State<home> createState() => homeState();
 }
 
 String txt = "2023/03/03";
 TextEditingController _controller = TextEditingController(text: txt);
 
 List<String> imageList = [
-
   'assets/cr1.jpg',
   'assets/cr2.jpg',
   'assets/cr3.jpg',
 ];
 
+class homeState extends State<home> {
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
 
+  static const CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
 
+  static const CameraPosition _kLake = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(37.43296265331129, -122.08832357078792),
+      tilt: 59.440717697143555,
+      zoom: 19.151926040649414);
 
-
-
-
-class _homeState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Color.fromRGBO(47, 114, 100, 1),
         title: Text('Select'),
       ),
       backgroundColor: Colors.white,
@@ -44,7 +54,8 @@ class _homeState extends State<home> {
             children: [
               //select stsrt date
               Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
+                padding:
+                    EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
                 child: Text(
                   "Select Pic-Up Date ",
                   style: TextStyle(
@@ -64,7 +75,7 @@ class _homeState extends State<home> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
-                      controller: _controller,
+                      // controller: _controller,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         suffixIcon: IconButton(
@@ -114,7 +125,8 @@ class _homeState extends State<home> {
 
               //select END date
               Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
+                padding:
+                    EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
                 child: Text(
                   "Select END Date ",
                   style: TextStyle(
@@ -134,7 +146,7 @@ class _homeState extends State<home> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
-                      controller: _controller,
+                      // controller: _controller,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         suffixIcon: IconButton(
@@ -182,107 +194,92 @@ class _homeState extends State<home> {
                 ),
               ),
 
-
               //location
-              Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
-                child: Text(
-                  "Select location ",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
+          Padding(
+            padding:
+            EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
+            child: Text(
+              "Select END Date ",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w800,
               ),
+            ),
+          ),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(3)),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: TextField(
-                      controller: _controller,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        suffixIcon: IconButton(
-                          icon: Icon(Icons.add),
-                          onPressed: () {
-                            // handle the tap event
-                            print('Icon tapped!');
-                            showCupertinoModalPopup(
-                              context: context,
-                              builder: (context) {
-                                return Container(
-                                  height:
-                                  MediaQuery.of(context).size.height * 0.36,
-                                  decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(40.0),
-                                      topRight: Radius.circular(40.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(3)),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: TextField(
+                  // controller: _controller,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        // handle the tap event
+                        print('Icon tapped!');
+                        showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) {
+                            return Container(
+                              height:
+                              MediaQuery.of(context).size.height * 0.46,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20.0),
+                                  topRight: Radius.circular(20.0),
+                                ),
+                              ),
+                              child: Column(
+                                children: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Done'),
+                                  ),
+
+                                  Expanded(
+                                    child: GoogleMap(
+                                      mapType: MapType.normal,
+                                      initialCameraPosition: _kGooglePlex,
+                                      onMapCreated: (GoogleMapController controller) {
+                                        _controller.complete(controller);
+                                      },
                                     ),
                                   ),
-                                  child: Column(
-                                    children: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text('Done'),
-                                      ),
-                                      Expanded(
-                                        child: CupertinoDatePicker(
-                                          onDateTimeChanged: (date) {},
-                                        ),
-                                      )
-                                    ],
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextButton(
+                                      onPressed: _goToTheLake,
+                                      child: Text('Go to the lake!'),
+                                    ),
                                   ),
-                                );
-                              },
+
+
+
+
+                                ],
+                              ),
                             );
                           },
-                        ),
-                        hintText: '2023/03/20',
-                      ),
+                        );
+                      },
                     ),
+                    hintText: '2023/03/20',
                   ),
                 ),
               ),
-
-              Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 8, left: 130, right: 10),
-                child: OutlinedButton(
-                  child: Text(
-                    "Filter",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15,
-                    ),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    side: BorderSide(
-                      width: 1.0, // set the border weight to 2.0
-                      color: Colors.white,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    fixedSize: Size(150, 50),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => home()));
-                  },
-                ),
-              ),
-
-
+            ),
+          ),
 
               //CarouselSlider
 
@@ -319,24 +316,16 @@ class _homeState extends State<home> {
                   }).toList(),
                   options: CarouselOptions(
                     autoPlay: true,
-                    aspectRatio: 16/6,
+                    aspectRatio: 16 / 6,
                     enlargeCenterPage: true,
                     viewportFraction: 0.9,
                   ),
                 ),
               ),
 
-
-
-
-
-
-
-
-
-
               Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
+                padding:
+                    EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
                 child: Text(
                   "Hot Deals",
                   style: GoogleFonts.roboto(
@@ -350,76 +339,82 @@ class _homeState extends State<home> {
               ),
 
               Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 20),
+                padding:
+                    EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 20),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.green,
+                    color: Colors.black,
                   ),
                   height: 100,
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                  Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "Available Vehicles",
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Available Vehicles",
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "Available Vehicles ",
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Text(
-                        "Available Vehicles ",
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            print("clicked");
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProductList()));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            height: 50,
+                            width: 50,
+                            child: Icon(Icons.arrow_forward),
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: (){
-                    print("clicked");
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ProductList()));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    height: 50,
-                    width: 50,
-                    child: Icon(Icons.arrow_forward),
-                  ),
-                ),
               ),
-            ],
-          ),
-        ),
-    ),
-
-
-
             ],
           ),
         ),
       ),
     );
   }
+
+  Future<void> _goToTheLake() async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+  }
+
 }
+

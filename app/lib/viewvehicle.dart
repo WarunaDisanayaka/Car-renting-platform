@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:cr_app/home.dart';
+import 'package:cr_app/vehicles.dart';
 import 'package:flutter/material.dart';
 
 class view extends StatefulWidget {
@@ -54,7 +56,6 @@ class _ViewState extends State<view> {
           ],
         ),
       ),
-
       body: Stack(
         children: [
           SizedBox(
@@ -67,7 +68,6 @@ class _ViewState extends State<view> {
       ),
     );
   }
-
 
   scroll() {
     return DraggableScrollableSheet(
@@ -102,7 +102,15 @@ class _ViewState extends State<view> {
                       ],
                     ),
                   ),
-                  Text("data"),
+                  Text(
+                    "INFO",
+                    style: TextStyle(
+                      color: Color.fromRGBO(47, 114, 100, 1),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
                   Text(
                     widget.product["model"] ?? "",
                     style: TextStyle(
@@ -143,13 +151,80 @@ class _ViewState extends State<view> {
                     ),
                   ),
 
+                  SizedBox(height: 20,),
+
+                  Text(
+                    "Discription",
+                    style: TextStyle(
+                      color: Color.fromRGBO(47, 114, 100, 1),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                    ),
+                  ),
+
+                  SizedBox(height: 10,),
+
+                  Text(
+                    "${widget.product["discription"] ?? ""}",
+                    style: TextStyle(
+                      color: Colors.blueGrey,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                    ),
+                  ),
+
+                 Padding(
+                   padding: const EdgeInsets.only(top: 20),
+                   child: Container(
+                     child: Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: [
+                         GestureDetector(
+                           onTap: () {
+                             Navigator.push(
+                                 context, MaterialPageRoute(builder: (context) =>  ProductList()));
+                           },
+                           child: Container(
+                             color: Color.fromRGBO(47, 114, 100, 1),
+                             child: Padding(
+                               padding: const EdgeInsets.fromLTRB(60, 15, 63, 10),
+                               child: Text("Back",
+                               style: TextStyle(
+                                 color: Colors.white,
+                               ),),
+                             ),
+                           ),
+                         ),
+
+
+                         GestureDetector(
+                           onTap: (){
+                             Navigator.push(
+                                 context, MaterialPageRoute(builder: (context) =>  home()));
+
+                           },
+                           child: Container(
+                             color: Color.fromRGBO(47, 114, 100, 1),
+                             child: Padding(
+                               padding: const EdgeInsets.fromLTRB(60, 15, 60, 15),
+                               child: Text("Next",
+                               style: TextStyle(
+                                 color: Colors.white,
+                               ),),
+                             ),
+                           ),
+                         ),
+                       ],
+                     ),
+                   ),
+                 )
+
                 ],
               ),
             ),
           );
         });
   }
-
 
   steps(BuildContext context, int index) {
     return Padding(
@@ -170,8 +245,7 @@ class _ViewState extends State<view> {
                 child: Text(
                   "Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, you can see it on your",
                   maxLines: 3,
-                  style: Theme
-                      .of(context)
+                  style: Theme.of(context)
                       .textTheme
                       .bodyText2!
                       .copyWith(color: Colors.green),
@@ -191,13 +265,4 @@ class _ViewState extends State<view> {
       ),
     );
   }
-
 }
-
-
-
-
-
-
-
-
