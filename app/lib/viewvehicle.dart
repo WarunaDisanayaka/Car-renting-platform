@@ -187,7 +187,7 @@ class _ViewState extends State<view> {
                            child: Container(
                              color: Color.fromRGBO(47, 114, 100, 1),
                              child: Padding(
-                               padding: const EdgeInsets.fromLTRB(60, 15, 63, 10),
+                               padding: const EdgeInsets.fromLTRB(75, 15, 63, 10),
                                child: Text("Back",
                                style: TextStyle(
                                  color: Colors.white,
@@ -206,7 +206,7 @@ class _ViewState extends State<view> {
                            child: Container(
                              color: Color.fromRGBO(47, 114, 100, 1),
                              child: Padding(
-                               padding: const EdgeInsets.fromLTRB(60, 15, 60, 15),
+                               padding: const EdgeInsets.fromLTRB(60, 15, 75, 15),
                                child: Text("Next",
                                style: TextStyle(
                                  color: Colors.white,

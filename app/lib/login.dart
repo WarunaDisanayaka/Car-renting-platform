@@ -22,12 +22,12 @@ class _loginState extends State<login> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Welcome"),
-        backgroundColor: Colors.green,
+        backgroundColor: Color.fromRGBO(47, 114, 100, 1),
         centerTitle: true,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             width: 2,
-            color: Colors.green,
+            color: Color.fromRGBO(47, 114, 100, 1),
           ),
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(400)),
         ),

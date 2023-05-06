@@ -29,13 +29,15 @@ Future<void> registerWithEmailAndPassword(String email, String password ,String 
 }
 
 
+
+
 class _registerState extends State<register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Welcome"),
-        backgroundColor: Colors.green,
+        backgroundColor: Color.fromRGBO(47, 114, 100, 1),
         centerTitle: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(400)),
