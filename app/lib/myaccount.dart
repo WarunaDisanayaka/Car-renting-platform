@@ -19,7 +19,7 @@ class _MyAccountState extends State<MyAccount> {
   }
 
   Future<void> _signOut() async {
-    await FirebaseAuth.instance.signOut()
+    await FirebaseAuth.instance.signOut();
     Navigator.push(
         context, MaterialPageRoute(builder: (context) =>  login()));
   }
