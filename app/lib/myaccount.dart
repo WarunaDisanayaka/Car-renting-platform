@@ -20,14 +20,13 @@ class _MyAccountState extends State<MyAccount> {
 
   Future<void> _signOut() async {
     await FirebaseAuth.instance.signOut();
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) =>  login()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => login()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(47, 114, 100, 1),
+      backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(47, 114, 100, 1),
@@ -52,7 +51,7 @@ class _MyAccountState extends State<MyAccount> {
               child: Text(
                 'Menu',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 24,
                 ),
               ),
@@ -76,7 +75,7 @@ class _MyAccountState extends State<MyAccount> {
       ),
       body: Column(
         children: [
-          SizedBox(height: 50),
+          SizedBox(height: 130),
           Container(
             child: Center(
               child: Column(
@@ -84,7 +83,7 @@ class _MyAccountState extends State<MyAccount> {
                   Text(
                     'Welcome, ${_user.displayName ?? 'User'}',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 20,
                     ),
                   ),
@@ -97,16 +96,30 @@ class _MyAccountState extends State<MyAccount> {
                   Text(
                     _user.email ?? '',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 16,
                     ),
                   ),
                 ],
               ),
             ),
-
           ),
 
+
+          // Padding(
+          //   padding: const EdgeInsets.only(top: 20),
+          //   child: Center(
+          //     child: Card(
+          //       child: SizedBox(
+          //         width: 320,
+          //         height: 300,
+          //         child: Center(
+          //           child: Text('Elevated Card'),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
