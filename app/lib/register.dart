@@ -3,7 +3,6 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 class register extends StatefulWidget {
   const register({Key? key}) : super(key: key);
 
@@ -19,25 +18,24 @@ final TextEditingController _telNoController = TextEditingController();
 final TextEditingController _addressController = TextEditingController();
 String errorMessage = '';
 
-Future<void> registerWithEmailAndPassword(String email, String password ,String uname, String telNo, String address) async {
+Future<void> registerWithEmailAndPassword(String email, String password,
+    String uname, String telNo, String address) async {
   try {
-    await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
     String uid = _auth.currentUser!.uid; // get the user id
     // Create a new document for the user with the uid as the document id
     await FirebaseFirestore.instance.collection('users').doc(uid).set({
       'username': uname,
       'telephone': telNo,
       'address': address,
+      'email': email,
     });
     // Navigate to the next screen after successful registration
   } catch (e) {
     print('Error: $e');
   }
 }
-
-
-
-
 
 class _registerState extends State<register> {
   final _formKey = GlobalKey<FormState>();
@@ -250,20 +248,19 @@ class _registerState extends State<register> {
                           fixedSize: Size(150, 50),
                         ),
                         onPressed: () async {
+                          if (_formKey.currentState!.validate()) ;
 
-                          if (_formKey.currentState!.validate());
-
-                            final String email = _emailController.text.trim();
-                          final String password = _passwordController.text.trim();
+                          final String email = _emailController.text.trim();
+                          final String password =
+                              _passwordController.text.trim();
                           final String uname = _usernameController.text.trim();
                           final String telNo = _telNoController.text.trim();
                           final String address = _addressController.text.trim();
-                          await registerWithEmailAndPassword(email, password, uname, telNo, address);
+                          await registerWithEmailAndPassword(
+                              email, password, uname, telNo, address);
                         },
                       ),
                     ),
-
-
 
                     if (errorMessage != null)
                       Padding(
@@ -276,9 +273,6 @@ class _registerState extends State<register> {
                           ),
                         ),
                       ),
-
-
-
                   ],
                 ),
               ),
