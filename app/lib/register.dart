@@ -40,6 +40,7 @@ Future<void> registerWithEmailAndPassword(String email, String password ,String 
 
 
 class _registerState extends State<register> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,209 +57,231 @@ class _registerState extends State<register> {
         ),
       ),
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 40),
+      body: Form(
+        key: _formKey,
         child: Container(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(18),
-                  child: Image(
-                    image: AssetImage(
-                      'assets/15.png',
-                    ),
-                    height: 100,
-                  ),
-                ),
-                //email
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextFormField(
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Email',
+          child: Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(18),
+                      child: Image(
+                        image: AssetImage(
+                          'assets/15.png',
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          if (!EmailValidator.validate(value)) {
-                            return 'Please enter a valid email';
-                          }
-                          return null;
+                        height: 100,
+                      ),
+                    ),
+                    //email
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: TextFormField(
+                            controller: _emailController,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Email',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your email';
+                              }
+                              if (!EmailValidator.validate(value)) {
+                                return 'Please enter a valid email';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    //password
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: TextFormField(
+                            controller: _passwordController,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Pssword',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your Password';
+                              }
+                              if (value.length < 6) {
+                                return 'Please enter a atleast 6 characters';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    //user name
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: TextFormField(
+                            controller: _usernameController,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'User Name',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your Username';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    //tel no
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: TextFormField(
+                            controller: _telNoController,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Tel-No',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your Tel-NO';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    //address
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: TextFormField(
+                            controller: _addressController,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Address',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your Address';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: OutlinedButton(
+                        child: Text(
+                          "Register",
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(
+                            width: 2.0, // set the border weight to 2.0
+                            color: Colors.green,
+                          ),
+                          fixedSize: Size(150, 50),
+                        ),
+                        onPressed: () async {
+
+                          if (_formKey.currentState!.validate());
+
+                            final String email = _emailController.text.trim();
+                          final String password = _passwordController.text.trim();
+                          final String uname = _usernameController.text.trim();
+                          final String telNo = _telNoController.text.trim();
+                          final String address = _addressController.text.trim();
+                          await registerWithEmailAndPassword(email, password, uname, telNo, address);
                         },
                       ),
                     ),
-                  ),
-                ),
 
-                SizedBox(
-                  height: 10,
-                ),
-                //email
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Pssword',
+
+
+                    if (errorMessage != null)
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          errorMessage!,
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                  ),
+
+
+
+                  ],
                 ),
-
-                SizedBox(
-                  height: 10,
-                ),
-
-                //user name
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        controller: _usernameController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'User Name',
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                SizedBox(
-                  height: 10,
-                ),
-
-                //tel no
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        controller: _telNoController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Tel-No',
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                SizedBox(
-                  height: 10,
-                ),
-
-                //address
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        controller: _addressController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Address',
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: OutlinedButton(
-                    child: Text(
-                      "Register",
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                    style: OutlinedButton.styleFrom(
-                      side: BorderSide(
-                        width: 2.0, // set the border weight to 2.0
-                        color: Colors.green,
-                      ),
-                      fixedSize: Size(150, 50),
-                    ),
-                    onPressed: () async {
-                      final String email = _emailController.text.trim();
-                      final String password = _passwordController.text.trim();
-                      final String uname = _usernameController.text.trim();
-                      final String telNo = _telNoController.text.trim();
-                      final String address = _addressController.text.trim();
-                      await registerWithEmailAndPassword(email, password, uname, telNo, address);
-                    },
-                  ),
-                ),
-
-
-                Padding(
-                  padding: const EdgeInsets.all(14.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Alrady Member"),
-                      Text(
-                        " .Login nor",
-                        style: TextStyle(
-                          color: Colors.green,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-
-                if (errorMessage != null)
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      errorMessage!,
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-
-
-
-              ],
+              ),
             ),
           ),
         ),
