@@ -338,6 +338,28 @@ class homeState extends State<home> {
                 ),
               ),
 
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15 ),
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context) =>  ProductList()));
+                    },
+                    child: Container(
+                      color: Color.fromRGBO(47, 114, 100, 1),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(60, 15, 63, 15),
+                        child: Text("Order",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
               //CarouselSlider
 
               Padding(
