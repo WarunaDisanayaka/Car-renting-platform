@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:cr_app/myaccount.dart';
 import 'package:intl/intl.dart';
 
 import 'package:cr_app/vehicles.dart';
@@ -91,11 +92,44 @@ class homeState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(47, 114, 100, 1),
-        title: Text('Select'),
+        elevation: 0.0,
       ),
-      backgroundColor: Colors.white,
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(47, 114, 100, 1),
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('My Account'),
+              onTap: () {
+                // Handle navigation to the home screen
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                // Handle navigation to the settings screen
+              },
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -104,7 +138,7 @@ class homeState extends State<home> {
               //select stsrt date
               Padding(
                 padding:
-                    EdgeInsets.only(top: 20, bottom: 8, left: 25, right: 5),
+                    EdgeInsets.only(top: 100, bottom: 8, left: 25, right: 5),
                 child: Text(
                   "Select Pic-Up Date ",
                   style: TextStyle(
@@ -344,7 +378,7 @@ class homeState extends State<home> {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
-                          context, MaterialPageRoute(builder: (context) =>  ProductList()));
+                          context, MaterialPageRoute(builder: (context) =>  MyAccount()));
                     },
                     child: Container(
                       color: Color.fromRGBO(47, 114, 100, 1),
