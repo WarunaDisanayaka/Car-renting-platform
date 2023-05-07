@@ -1,6 +1,7 @@
 import 'package:cr_app/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyAccount extends StatefulWidget {
   const MyAccount({Key? key}) : super(key: key);
@@ -12,10 +13,28 @@ class MyAccount extends StatefulWidget {
 class _MyAccountState extends State<MyAccount> {
   late User _user;
 
+  //get orders
+
+  final databaseReference = FirebaseFirestore.instance;
+  List<Map<dynamic, dynamic>> ordersList = [];
+
   @override
   void initState() {
     super.initState();
     _user = FirebaseAuth.instance.currentUser!;
+    String userId = _user.uid;
+    databaseReference
+        .collection("orders")
+        .where("user", isEqualTo: userId)
+        .get()
+        .then((QuerySnapshot snapshot) {
+      setState(() {
+        ordersList = snapshot.docs
+            .map((DocumentSnapshot document) =>
+                document.data() as Map<dynamic, dynamic>)
+            .toList();
+      });
+    });
   }
 
   Future<void> _signOut() async {
@@ -26,102 +45,125 @@ class _MyAccountState extends State<MyAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(47, 114, 100, 1),
-        elevation: 0.0,
-        actions: [
-          IconButton(
-            onPressed: () {
-              _signOut();
-            },
-            icon: Icon(Icons.logout),
-          ),
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(47, 114, 100, 1),
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('My Account'),
-              onTap: () {
-                // Handle navigation to the home screen
+        backgroundColor: Colors.white,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Color.fromRGBO(47, 114, 100, 1),
+          elevation: 0.0,
+          actions: [
+            IconButton(
+              onPressed: () {
+                _signOut();
               },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-              onTap: () {
-                // Handle navigation to the settings screen
-              },
+              icon: Icon(Icons.logout),
             ),
           ],
         ),
-      ),
-      body: Column(
-        children: [
-          SizedBox(height: 130),
-          Container(
-            child: Center(
-              child: Column(
-                children: [
-                  Text(
-                    'Welcome, ${_user.displayName ?? 'User'}',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(47, 114, 100, 1),
+                ),
+                child: Text(
+                  'Menu',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
                   ),
-                  SizedBox(height: 10),
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(_user.photoURL ?? ''),
-                    radius: 50,
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    _user.email ?? '',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+              ListTile(
+                leading: Icon(Icons.home),
+                title: Text('My Account'),
+                onTap: () {
+                  // Handle navigation to the home screen
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Text('Settings'),
+                onTap: () {
+                  // Handle navigation to the settings screen
+                },
+              ),
+            ],
           ),
+        ),
+        body: ordersList.isEmpty
+            ? Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+                child: Column(
+                  children: List.generate(ordersList.length, (index) {
+                    Map<dynamic, dynamic> order = ordersList[index];
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: 15, bottom: 0, left: 10, right: 10),
+                            child: Column(
+                              children: [
 
-
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 20),
-          //   child: Center(
-          //     child: Card(
-          //       child: SizedBox(
-          //         width: 320,
-          //         height: 300,
-          //         child: Center(
-          //           child: Text('Elevated Card'),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-        ],
-      ),
-    );
+                                Divider(color: Colors.black),
+                                SizedBox(height: 10),
+                                Container(
+                                  child: Text(
+                                    "Order Details",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  "Vehicle MOdel: ${order["productModel"] ?? ""}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  "Order Start Date: ${order["dateTime"] ?? ""}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  "Order End Date: ${order["dateTime2"] ?? ""}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  "Order Status: ${order["orderStatus"] ?? ""}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                ),
+              ));
   }
 }
