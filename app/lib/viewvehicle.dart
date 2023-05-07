@@ -184,6 +184,7 @@ class _ViewState extends State<view> {
                              Navigator.push(
                                  context, MaterialPageRoute(builder: (context) =>  ProductList()));
                            },
+
                            child: Container(
                              color: Color.fromRGBO(47, 114, 100, 1),
                              child: Padding(
@@ -197,23 +198,28 @@ class _ViewState extends State<view> {
                          ),
 
 
-                         GestureDetector(
-                           onTap: (){
-                             Navigator.push(
-                                 context, MaterialPageRoute(builder: (context) =>  home()));
-
-                           },
-                           child: Container(
-                             color: Color.fromRGBO(47, 114, 100, 1),
-                             child: Padding(
-                               padding: const EdgeInsets.fromLTRB(60, 15, 75, 15),
-                               child: Text("Next",
-                               style: TextStyle(
-                                 color: Colors.white,
-                               ),),
-                             ),
+                   GestureDetector(
+                     onTap: () {
+                       Navigator.push(
+                         context,
+                         MaterialPageRoute(builder: (context) => home(product: widget.product)),
+                       );
+                     },
+                     child: Container(
+                       color: Color.fromRGBO(47, 114, 100, 1),
+                       child: Padding(
+                         padding: const EdgeInsets.fromLTRB(60, 15, 63, 15),
+                         child: Text(
+                           "Next",
+                           style: TextStyle(
+                             color: Colors.white,
                            ),
                          ),
+                       ),
+                     ),
+                   ),
+
+
                        ],
                      ),
                    ),

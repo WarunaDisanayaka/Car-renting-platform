@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:cr_app/myaccount.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 
 import 'package:cr_app/vehicles.dart';
@@ -11,13 +12,21 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+// Initialize Firebase app
 class home extends StatefulWidget {
-  const home({Key? key}) : super(key: key);
+  final Map<dynamic, dynamic> product;
+
+  const home({Key? key, required this.product}) : super(key: key);
 
   @override
-  State<home> createState() => homeState();
+  _HomeState createState() => _HomeState();
 }
+
+
+
 
 String txt = "2023/03/03";
 String selectedDateTime = '';
@@ -33,7 +42,7 @@ List<String> imageList = [
 
 final TextEditingController _locationController = TextEditingController();
 
-class homeState extends State<home> {
+class _HomeState extends State<home> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
@@ -376,9 +385,26 @@ class homeState extends State<home> {
                 padding: const EdgeInsets.fromLTRB(0, 15, 0, 15 ),
                 child: Center(
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (context) =>  MyAccount()));
+                    onTap: () async {
+                      // Get the current user
+                      final user = FirebaseAuth.instance.currentUser;
+
+// Get the address from the _locationController text field
+                      final address = _locationController.text;
+
+// Create a new document in the orders collection
+                      final ordersRef = FirebaseFirestore.instance.collection('orders');
+                      final newOrder = await ordersRef.add({
+                        'dateTime': selectedDateTime,
+                        'dateTime2': selectedDateTime2,
+                        'productModel': "${widget.product["model"] ?? ""}",
+                        'user': user?.uid,
+                        'address': address,
+                      });
+
+// Navigate to the account screen
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => MyAccount()));
+
                     },
                     child: Container(
                       color: Color.fromRGBO(47, 114, 100, 1),
