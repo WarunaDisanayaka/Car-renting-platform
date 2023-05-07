@@ -80,6 +80,8 @@ class _MyAccountState extends State<MyAccount> {
                 title: Text('My Account'),
                 onTap: () {
                   // Handle navigation to the home screen
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) =>  MyAccount()));
                 },
               ),
               ListTile(

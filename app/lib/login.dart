@@ -53,6 +53,7 @@ class _loginState extends State<login> {
                   ),
                 ),
 
+
                 //email
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -116,7 +117,7 @@ class _loginState extends State<login> {
                     style: OutlinedButton.styleFrom(
                       side: BorderSide(
                         width: 2.0, // set the border weight to 2.0
-                        color: Colors.green,
+                        color:  Color.fromRGBO(47, 114, 100, 1),
                       ),
                       fixedSize: Size(150, 50),
                     ),
@@ -156,7 +157,7 @@ class _loginState extends State<login> {
                     Text(
                       "Not a member? .",
                       style: TextStyle(
-                        color: Colors.green,
+                        color:  Color.fromRGBO(47, 114, 100, 1),
                         fontWeight: FontWeight.bold,
                       ),
                     ),

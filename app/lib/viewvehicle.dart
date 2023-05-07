@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cr_app/home.dart';
+import 'package:cr_app/myaccount.dart';
 import 'package:cr_app/vehicles.dart';
 import 'package:flutter/material.dart';
 
@@ -44,6 +45,8 @@ class _ViewState extends State<view> {
               title: Text('My Account'),
               onTap: () {
                 // Handle navigation to the home screen
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) =>  MyAccount()));
               },
             ),
             ListTile(

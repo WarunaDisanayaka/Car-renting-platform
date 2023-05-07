@@ -268,7 +268,7 @@ class _registerState extends State<register> {
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(
                             width: 2.0, // set the border weight to 2.0
-                            color: Colors.green,
+                            color:  Color.fromRGBO(47, 114, 100, 1),
                           ),
                           fixedSize: Size(150, 50),
                         ),
