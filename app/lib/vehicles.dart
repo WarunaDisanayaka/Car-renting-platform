@@ -37,10 +37,10 @@ class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(47, 114, 100, 1),
+      backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color.fromRGBO(47, 114, 100, 1),
         elevation: 0.0,
         title: Text('Available Vehicle'),
       ),
@@ -129,7 +129,7 @@ class _ProductListState extends State<ProductList> {
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
                     child: Container(
-                      height: 220,
+                      height: 180,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black),
                         color: Colors.white,
@@ -139,11 +139,11 @@ class _ProductListState extends State<ProductList> {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(
-                                top: 15, bottom: 0, left: 10, right: 10),
+                                top: 10, bottom: 0, left: 10, right: 10),
                             child: Column(
                               children: [
                                 Container(
-                                  height: 150,
+                                  height: 120,
                                   child: Row(
                                     mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -202,7 +202,7 @@ class _ProductListState extends State<ProductList> {
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            top: 6, bottom: 5, left: 0, right: 20),
+                                            top: 6, bottom: 0, left: 0, right: 20),
                                         child: Flexible(
                                           child: Image(
                                             image: AssetImage(
@@ -273,7 +273,7 @@ class _ProductListState extends State<ProductList> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10.0),
                                       ),
-                                      fixedSize: Size(100, 40),
+                                      fixedSize: Size(100, 30),
                                     ),
                                       onPressed: () {
                                         Navigator.push(
