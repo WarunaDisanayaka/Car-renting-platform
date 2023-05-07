@@ -95,74 +95,85 @@ class _MyAccountState extends State<MyAccount> {
         body: ordersList.isEmpty
             ? Center(child: CircularProgressIndicator())
             : SingleChildScrollView(
-                child: Column(
-                  children: List.generate(ordersList.length, (index) {
-                    Map<dynamic, dynamic> order = ordersList[index];
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: 15, bottom: 0, left: 10, right: 10),
-                            child: Column(
-                              children: [
-
-                                Divider(color: Colors.black),
-                                SizedBox(height: 10),
-                                Container(
-                                  child: Text(
-                                    "Order Details",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w800,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 100),
+                  child: Column(
+                    children: List.generate(ordersList.length, (index) {
+                      Map<dynamic, dynamic> order = ordersList[index];
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: 15, bottom: 0, left: 10, right: 10),
+                              child: Container(
+                                height: 180,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black),
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 10),
+                                    Container(
+                                      child: Center(
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              "Order Details",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w800,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Vehicle MOdel: ${order["productModel"] ?? ""}",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Order Start Date: ${order["dateTime"] ?? ""}",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Order End Date: ${order["dateTime2"] ?? ""}",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Order Status: ${order["orderStatus"] ?? ""}",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                SizedBox(height: 10),
-                                Text(
-                                  "Vehicle MOdel: ${order["productModel"] ?? ""}",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(height: 5),
-                                Text(
-                                  "Order Start Date: ${order["dateTime"] ?? ""}",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(height: 5),
-                                Text(
-                                  "Order End Date: ${order["dateTime2"] ?? ""}",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(height: 5),
-                                Text(
-                                  "Order Status: ${order["orderStatus"] ?? ""}",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
+                          ],
+                        ),
+                      );
+                    }),
+                  ),
                 ),
               ));
   }
