@@ -161,6 +161,26 @@ class _MyAccountState extends State<MyAccount> {
                                                 fontWeight: FontWeight.w400,
                                               ),
                                             ),
+
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            // Add your emergency notification logic here
+                                          },
+                                          child: Text(
+                                            'Emergency Notify',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Colors.red,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(5),
+                                            ),
+                                          ),
+                                        ),
                                           ],
                                         ),
                                       ),
