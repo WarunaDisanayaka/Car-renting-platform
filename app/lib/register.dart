@@ -1,4 +1,7 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cr_app/login.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,7 +22,7 @@ final TextEditingController _addressController = TextEditingController();
 String errorMessage = '';
 
 Future<void> registerWithEmailAndPassword(String email, String password,
-    String uname, String telNo, String address) async {
+    String uname, String telNo, String address, BuildContext context) async {
   try {
     await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
@@ -31,11 +34,33 @@ Future<void> registerWithEmailAndPassword(String email, String password,
       'address': address,
       'email': email,
     });
+    // Show popup message after successful registration
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Registration Successful"),
+          content: Text("Your registration was successful!"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+
     // Navigate to the next screen after successful registration
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => login()));
   } catch (e) {
     print('Error: $e');
   }
 }
+
 
 class _registerState extends State<register> {
   final _formKey = GlobalKey<FormState>();
@@ -257,7 +282,8 @@ class _registerState extends State<register> {
                           final String telNo = _telNoController.text.trim();
                           final String address = _addressController.text.trim();
                           await registerWithEmailAndPassword(
-                              email, password, uname, telNo, address);
+                              email, password, uname, telNo, address, context);
+
                         },
                       ),
                     ),
