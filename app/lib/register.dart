@@ -144,6 +144,7 @@ class _registerState extends State<register> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20.0),
                           child: TextFormField(
+                            obscureText: true,
                             controller: _passwordController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
