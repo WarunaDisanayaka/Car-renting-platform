@@ -382,40 +382,55 @@ class _HomeState extends State<home> {
                   ),
                 ),
               ),
-
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15 ),
+                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                 child: Center(
                   child: GestureDetector(
                     onTap: () async {
-                      // Get the current user
                       final user = FirebaseAuth.instance.currentUser;
-
-// Get the address from the _locationController text field
                       final address = _locationController.text;
 
-// Create a new document in the orders collection
-                      final ordersRef = FirebaseFirestore.instance.collection('orders');
-                      final newOrder = await ordersRef.add({
-                        'dateTime': selectedDateTime,
-                        'dateTime2': selectedDateTime2,
-                        'productModel': "${widget.product["model"] ?? ""}",
-                        'user': user?.uid,
-                        'address': address,
-                      });
+                      if (address.isEmpty || selectedDateTime.isEmpty || selectedDateTime2.isEmpty) {
+                        // Show error message here (e.g., using a dialog)
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Error'),
+                            content: Text('Fill all.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      } else {
+                        final ordersRef = FirebaseFirestore.instance.collection('orders');
+                        final newOrder = await ordersRef.add({
+                          'dateTime': selectedDateTime,
+                          'dateTime2': selectedDateTime2,
+                          'productModel': "${widget.product["model"] ?? ""}",
+                          'user': user?.uid,
+                          'address': address,
+                        });
 
-// Navigate to the account screen
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => MyAccount()));
-
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyAccount()),
+                        );
+                      }
                     },
                     child: Container(
                       color: Color.fromRGBO(47, 114, 100, 1),
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(60, 15, 63, 15),
-                        child: Text("Order",
+                        child: Text(
+                          "Order",
                           style: TextStyle(
                             color: Colors.white,
-                          ),),
+                          ),
+                        ),
                       ),
                     ),
                   ),
