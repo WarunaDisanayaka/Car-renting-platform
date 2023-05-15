@@ -1,4 +1,5 @@
 import 'package:cr_app/login.dart';
+import 'package:cr_app/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,7 +40,7 @@ class _MyAccountState extends State<MyAccount> {
 
   Future<void> _signOut() async {
     await FirebaseAuth.instance.signOut();
-    Navigator.push(context, MaterialPageRoute(builder: (context) => login()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => welcome()));
   }
 
   @override
