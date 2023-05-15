@@ -198,6 +198,7 @@ class _HomeState extends State<home> {
                                       Expanded(
                                         child: CupertinoDatePicker(
                                           mode: CupertinoDatePickerMode.date,
+                                          minimumDate: DateTime.now(),
                                           onDateTimeChanged: (DateTime dateTime) {
                                             setState(() {
                                               selectedDateTime =
@@ -274,16 +275,17 @@ class _HomeState extends State<home> {
                                         child: Text('Done'),
                                       ),
                                       Expanded(
-                                        child:CupertinoDatePicker(
+                                        child: CupertinoDatePicker(
                                           mode: CupertinoDatePickerMode.date,
+                                          minimumDate: DateTime.now(),
                                           onDateTimeChanged: (DateTime dateTime) {
                                             setState(() {
-                                              selectedDateTime2 =
-                                                  DateFormat.yMd().format(dateTime).toString();
+                                              selectedDateTime2 = DateFormat.yMd().format(dateTime).toString();
                                             });
                                           },
                                         ),
                                       )
+
                                     ],
                                   ),
                                 );
@@ -360,13 +362,6 @@ class _HomeState extends State<home> {
                                           ),
                                           markers: _markers,
                                           onTap: _pickLocation,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: ElevatedButton(
-                                          onPressed: _searchLocation,
-                                          child: Text('Search'),
                                         ),
                                       ),
                                     ],
