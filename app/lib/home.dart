@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:cr_app/myaccount.dart';
+import 'package:cr_app/paypal.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 
@@ -377,60 +378,127 @@ class _HomeState extends State<home> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                child: Center(
-                  child: GestureDetector(
-                    onTap: () async {
-                      final user = FirebaseAuth.instance.currentUser;
-                      final address = _locationController.text;
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () async {
+                          final user = FirebaseAuth.instance.currentUser;
+                          final address = _locationController.text;
 
-                      if (address.isEmpty || selectedDateTime.isEmpty || selectedDateTime2.isEmpty) {
-                        // Show error message here (e.g., using a dialog)
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: Text('Error'),
-                            content: Text('Fill all.'),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: Text('OK'),
+                          if (address.isEmpty || selectedDateTime.isEmpty || selectedDateTime2.isEmpty) {
+                            // Show error message here (e.g., using a dialog)
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text('Error'),
+                                content: Text('Fill all.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: Text('OK'),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        );
-                      } else {
-                        final ordersRef = FirebaseFirestore.instance.collection('orders');
-                        final newOrder = await ordersRef.add({
-                          'dateTime': selectedDateTime,
-                          'dateTime2': selectedDateTime2,
-                          'productModel': "${widget.product["model"] ?? ""}",
-                          'user': user?.uid,
-                          'address': address,
-                        });
+                            );
+                          } else {
+                            final ordersRef = FirebaseFirestore.instance.collection('orders');
+                            final newOrder = await ordersRef.add({
+                              'dateTime': selectedDateTime,
+                              'dateTime2': selectedDateTime2,
+                              'productModel': "${widget.product["model"] ?? ""}",
+                              'user': user?.uid,
+                              'address': address,
+                            });
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MyAccount()),
-                        );
-                      }
-                    },
-                    child: Container(
-                      color: Color.fromRGBO(47, 114, 100, 1),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(60, 15, 63, 15),
-                        child: Text(
-                          "Order",
-                          style: TextStyle(
-                            color: Colors.white,
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => MyAccount()),
+                            );
+                          }
+                        },
+                        child: Container(
+                          color: Color.fromRGBO(47, 114, 100, 1),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(60, 15, 63, 15),
+                            child: Text(
+                              "Order",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
+
+                  SizedBox(width: 10,),
+
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () async {
+                          final user = FirebaseAuth.instance.currentUser;
+                          final address = _locationController.text;
+
+                          if (address.isEmpty || selectedDateTime.isEmpty || selectedDateTime2.isEmpty) {
+                            // Show error message here (e.g., using a dialog)
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text('Error'),
+                                content: Text('Fill all.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: Text('OK'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          } else {
+                            final ordersRef = FirebaseFirestore.instance.collection('orders');
+                            final newOrder = await ordersRef.add({
+                              'dateTime': selectedDateTime,
+                              'dateTime2': selectedDateTime2,
+                              'productModel': "${widget.product["model"] ?? ""}",
+                              'user': user?.uid,
+                              'address': address,
+                            });
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => paypal(title: '',)),
+                              // MaterialPageRoute(builder: (context) => MyAccount()),
+                            );
+                          }
+                        },
+                        child: Container(
+                          color: Color.fromRGBO(0, 48, 135, 1),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(60, 15, 63, 15),
+                            child: Text(
+                              "PayPal",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
+
+
+
+
 
               //CarouselSlider
 
