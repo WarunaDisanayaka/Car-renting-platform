@@ -434,6 +434,7 @@ class _HomeState extends State<home> {
 
               //CarouselSlider
 
+
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: CarouselSlider(
