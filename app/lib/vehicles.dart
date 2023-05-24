@@ -3,34 +3,47 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cr_app/viewvehicle.dart';
-
 import 'myaccount.dart';
 
 class ProductList extends StatefulWidget {
   @override
   _ProductListState createState() => _ProductListState();
-
 }
-List<String> imageList = [
 
+List<String> imageList = [
   'assets/cr1.jpg',
   'assets/cr2.jpg',
   'assets/cr3.jpg',
 ];
 
-
 class _ProductListState extends State<ProductList> {
   final databaseReference = FirebaseFirestore.instance;
-
   List<Map<dynamic, dynamic>> productList = [];
 
   @override
   void initState() {
     super.initState();
-    databaseReference.collection("products").get().then((QuerySnapshot snapshot) {
-      setState(() {
-        productList = snapshot.docs.map((DocumentSnapshot document) => document.data() as Map<dynamic, dynamic>).toList();
-      });
+    loadProductList();
+  }
+
+  void loadProductList() async {
+    QuerySnapshot ordersSnapshot =
+    await databaseReference.collection("orders").get();
+
+    List<String> orderedProductModels = [];
+    ordersSnapshot.docs.forEach((order) {
+      orderedProductModels.add(order["productModel"]);
+    });
+
+    QuerySnapshot productsSnapshot =
+    await databaseReference.collection("products").get();
+
+    setState(() {
+      productList = productsSnapshot.docs
+          .where((product) =>
+      !orderedProductModels.contains(product["model"]))
+          .map((product) => product.data() as Map<dynamic, dynamic>)
+          .toList();
     });
   }
 
@@ -64,9 +77,10 @@ class _ProductListState extends State<ProductList> {
               leading: Icon(Icons.home),
               title: Text('My Account'),
               onTap: () {
-                // Handle navigation to the home screen
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) =>  MyAccount()));
+                  context,
+                  MaterialPageRoute(builder: (context) => MyAccount()),
+                );
               },
             ),
             ListTile(
@@ -79,11 +93,9 @@ class _ProductListState extends State<ProductList> {
           ],
         ),
       ),
-
       body: SafeArea(
         child: Column(
           children: [
-
             //CarouselSlider
             Padding(
               padding: const EdgeInsets.only(top: 10),
@@ -95,7 +107,6 @@ class _ProductListState extends State<ProductList> {
                         decoration: BoxDecoration(
                           color: Colors.black.withOpacity(0.8),
                           borderRadius: BorderRadius.circular(8.0),
-
                         ),
                       ),
                       ClipRRect(
@@ -117,8 +128,6 @@ class _ProductListState extends State<ProductList> {
                 ),
               ),
             ),
-
-
             Expanded(
               child: productList.isEmpty
                   ? Center(child: CircularProgressIndicator())
@@ -147,7 +156,8 @@ class _ProductListState extends State<ProductList> {
                                   child: Row(
                                     mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
                                     children: [
                                       Column(
                                         crossAxisAlignment:
@@ -164,7 +174,8 @@ class _ProductListState extends State<ProductList> {
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 18,
-                                                fontWeight: FontWeight.w800,
+                                                fontWeight:
+                                                FontWeight.w800,
                                               ),
                                             ),
                                           ),
@@ -175,11 +186,12 @@ class _ProductListState extends State<ProductList> {
                                                 left: 10,
                                                 right: 10),
                                             child: Text(
-                                              product["model"]?? "",
+                                              product["model"] ?? "",
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 16,
-                                                fontWeight: FontWeight.w400,
+                                                fontWeight:
+                                                FontWeight.w400,
                                               ),
                                             ),
                                           ),
@@ -190,11 +202,12 @@ class _ProductListState extends State<ProductList> {
                                                 left: 10,
                                                 right: 10),
                                             child: Text(
-                                              "RS: ${product["price"]?? ""}  | Per Day",
+                                              "RS: ${product["price"] ?? ""}  | Per Day",
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 18,
-                                                fontWeight: FontWeight.w800,
+                                                fontWeight:
+                                                FontWeight.w800,
                                               ),
                                             ),
                                           ),
@@ -202,7 +215,10 @@ class _ProductListState extends State<ProductList> {
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            top: 6, bottom: 0, left: 0, right: 20),
+                                            top: 6,
+                                            bottom: 0,
+                                            left: 0,
+                                            right: 20),
                                         child: Flexible(
                                           child: Image(
                                             image: AssetImage(
@@ -212,7 +228,6 @@ class _ProductListState extends State<ProductList> {
                                           ),
                                         ),
                                       ),
-
                                     ],
                                   ),
                                 ),
@@ -222,16 +237,18 @@ class _ProductListState extends State<ProductList> {
 
                           // Vehicle info bar
                           Padding(
-                            padding:
-                            EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
+                            padding: EdgeInsets.only(
+                                top: 0, bottom: 0, left: 10, right: 10),
                             child: Container(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(right: 2),
+                                        padding: const EdgeInsets.only(
+                                            right: 2),
                                         child: Icon(Icons.analytics),
                                       ),
                                       Text("Petrol"),
@@ -240,7 +257,8 @@ class _ProductListState extends State<ProductList> {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(right: 2),
+                                        padding: const EdgeInsets.only(
+                                            right: 2),
                                         child: Icon(Icons.person),
                                       ),
                                       Text("${product["seats"]} Seats"),
@@ -249,7 +267,8 @@ class _ProductListState extends State<ProductList> {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(right: 2),
+                                        padding: const EdgeInsets.only(
+                                            right: 2),
                                         child: Icon(Icons.directions_car),
                                       ),
                                       Text("${product["transmission"]}"),
@@ -267,22 +286,24 @@ class _ProductListState extends State<ProductList> {
                                     style: OutlinedButton.styleFrom(
                                       backgroundColor: Colors.black,
                                       side: BorderSide(
-                                        width: 2.0, // set the border weight to 2.0
+                                        width: 2.0,
                                         color: Colors.green,
                                       ),
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10.0),
+                                        borderRadius:
+                                        BorderRadius.circular(10.0),
                                       ),
                                       fixedSize: Size(100, 30),
                                     ),
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => view(product: product),
-                                          ),
-                                        );
-                                      }
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              view(product: product),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ],
                               ),
@@ -299,4 +320,5 @@ class _ProductListState extends State<ProductList> {
         ),
       ),
     );
-  }}
+  }
+}
