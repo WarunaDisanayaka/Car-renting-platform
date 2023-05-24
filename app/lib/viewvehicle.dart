@@ -63,14 +63,14 @@ class _ViewState extends State<view> {
         children: [
           SizedBox(
             width: double.infinity,
-            child: Image.asset('assets/cr4.jpeg'),
+            child:  Image.network(
+              widget.product["image"] ?? "", // Assuming "model" contains a valid image URL
+              width: 200, // Adjust the width as per your requirement
+              height: 200, // Adjust the height as per your requirement
+            ),
             height: 390,
           ),
-          // Image.network(
-          //   widget.product["model"] ?? "", // Assuming "model" contains a valid image URL
-          //   width: 200, // Adjust the width as per your requirement
-          //   height: 200, // Adjust the height as per your requirement
-          // )
+
           scroll(),
         ],
       ),
