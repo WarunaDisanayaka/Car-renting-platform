@@ -5,6 +5,9 @@ import 'package:cr_app/login.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
 class register extends StatefulWidget {
   const register({Key? key}) : super(key: key);
@@ -20,19 +23,38 @@ final TextEditingController _usernameController = TextEditingController();
 final TextEditingController _telNoController = TextEditingController();
 final TextEditingController _addressController = TextEditingController();
 String errorMessage = '';
+File? _imageFile;
+
 
 Future<void> registerWithEmailAndPassword(String email, String password,
-    String uname, String telNo, String address, BuildContext context) async {
+    String uname, String telNo, String address, File? imageFile, BuildContext context) async {
   try {
     await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
     String uid = _auth.currentUser!.uid; // get the user id
+
+    // Upload image to Firebase Storage
+    String imagePath = 'users/$uid/profile.png';
+    if (imageFile != null) {
+      Reference storageReference = FirebaseStorage.instance.ref().child(imagePath);
+      await storageReference.putFile(imageFile);
+      print("------------------------------test line asj---------------------");
+    }
+
+    // Get the image download URL
+    String imageUrl = '';
+    if (imageFile != null) {
+      imageUrl = await FirebaseStorage.instance.ref(imagePath).getDownloadURL();
+    }
+
+
     // Create a new document for the user with the uid as the document id
     await FirebaseFirestore.instance.collection('users').doc(uid).set({
       'username': uname,
       'telephone': telNo,
       'address': address,
       'email': email,
+      'profileImageUrl': imageUrl,
     });
     // Show popup message after successful registration
     showDialog(
@@ -258,6 +280,27 @@ class _registerState extends State<register> {
                     ),
 
                     Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: ElevatedButton.icon(
+                        onPressed: _selectImage,
+                        icon: Icon(Icons.image),
+                        label: Text('Driving License'),
+                        style: ButtonStyle(
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                            EdgeInsets.symmetric(vertical: 10.0, horizontal: 90.0),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: OutlinedButton(
                         child: Text(
@@ -283,7 +326,7 @@ class _registerState extends State<register> {
                           final String telNo = _telNoController.text.trim();
                           final String address = _addressController.text.trim();
                           await registerWithEmailAndPassword(
-                              email, password, uname, telNo, address, context);
+                              email, password, uname, telNo, address, _imageFile, context);
 
                         },
                       ),
@@ -309,4 +352,16 @@ class _registerState extends State<register> {
       ),
     );
   }
+
+
+  Future<void> _selectImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _imageFile = File(pickedImage.path);
+      });
+    }
+  }
+
 }
