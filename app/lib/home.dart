@@ -198,12 +198,12 @@ class _HomeState extends State<home> {
                                       ),
                                       Expanded(
                                         child: CupertinoDatePicker(
-                                          mode: CupertinoDatePickerMode.date,
+                                          mode: CupertinoDatePickerMode.dateAndTime,
                                           minimumDate: DateTime.now(),
                                           onDateTimeChanged: (DateTime dateTime) {
                                             setState(() {
                                               selectedDateTime =
-                                                  DateFormat.yMd().format(dateTime).toString();
+                                                  DateFormat.yMd().add_Hm().format(dateTime).toString();
                                             });
                                           },
                                         ),
@@ -277,15 +277,15 @@ class _HomeState extends State<home> {
                                       ),
                                       Expanded(
                                         child: CupertinoDatePicker(
-                                          mode: CupertinoDatePickerMode.date,
+                                          mode: CupertinoDatePickerMode.dateAndTime,
                                           minimumDate: DateTime.now(),
                                           onDateTimeChanged: (DateTime dateTime) {
                                             setState(() {
-                                              selectedDateTime2 = DateFormat.yMd().format(dateTime).toString();
+                                              selectedDateTime2 = DateFormat.yMd().add_Hm().format(dateTime).toString();
                                             });
                                           },
                                         ),
-                                      )
+                                      ),
 
                                     ],
                                   ),

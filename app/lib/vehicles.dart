@@ -26,6 +26,7 @@ class _ProductListState extends State<ProductList> {
     loadProductList();
   }
 
+
   void loadProductList() async {
     QuerySnapshot ordersSnapshot =
     await databaseReference.collection("orders").get();
