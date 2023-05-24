@@ -28,12 +28,14 @@ class home extends StatefulWidget {
 
 
 
-
 String txt = "2023/03/03";
 String selectedDateTime = '';
 String selectedDateTime2 = '';
 TextEditingController _controller = TextEditingController(text: txt);
 String _selectedLocationName = '';
+
+
+
 
 List<String> imageList = [
   'assets/cr1.jpg',
@@ -72,6 +74,7 @@ class _HomeState extends State<home> {
       ));
       _locationController.text = address;
     });
+
   }
 
   void _searchLocation() {
@@ -92,6 +95,7 @@ class _HomeState extends State<home> {
     target: LatLng(6.927079, 79.861244),
     zoom: 10.4746,
   );
+
 
   static const CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
@@ -215,7 +219,7 @@ class _HomeState extends State<home> {
                             );
                           },
                         ),
-                        hintText: 'YYYY/MM/DD',
+                        hintText: 'YYYY/MM/DD/TIME',
                       ),
                       controller: TextEditingController(text: selectedDateTime),
                     ),
@@ -294,7 +298,7 @@ class _HomeState extends State<home> {
                             );
                           },
                         ),
-                        hintText: 'YYYY/MM/DD',
+                        hintText: 'YYYY/MM/DD/TIME',
                       ),
                       controller: TextEditingController(text: selectedDateTime2),
                     ),
@@ -446,6 +450,16 @@ class _HomeState extends State<home> {
                           final user = FirebaseAuth.instance.currentUser;
                           final address = _locationController.text;
 
+                          // Parse the formatted strings back to DateTime objects
+                          DateTime parsedDateTime = DateFormat.yMd().add_Hm().parse(selectedDateTime);
+                          DateTime parsedDateTime2 = DateFormat.yMd().add_Hm().parse(selectedDateTime2);
+
+                          // Calculate the difference between the two DateTime values
+                          Duration difference = parsedDateTime2.difference(parsedDateTime);
+
+                          // Calculate the difference in days
+                          int differenceInDays = difference.inDays;
+
                           if (address.isEmpty || selectedDateTime.isEmpty || selectedDateTime2.isEmpty) {
                             // Show error message here (e.g., using a dialog)
                             showDialog(
@@ -473,7 +487,7 @@ class _HomeState extends State<home> {
 
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => paypal(title: '',)),
+                              MaterialPageRoute(builder: (context) => paypal(title: '',differenceInDays: differenceInDays,)),
                               // MaterialPageRoute(builder: (context) => MyAccount()),
                             );
                           }

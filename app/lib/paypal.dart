@@ -11,18 +11,20 @@ class Paypal extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Paypal',
       theme: ThemeData(),
-      home: const paypal(title: 'PayPal'),
+      home: paypal(title: 'PayPal', differenceInDays: 0),
     );
   }
 }
 
 class paypal extends StatefulWidget {
-  const paypal({Key? key, required this.title}) : super(key: key);
+  const paypal({Key? key, required this.title, required this.differenceInDays}) : super(key: key);
   final String title;
+  final int differenceInDays;
 
   @override
   State<paypal> createState() => _paypalState();
 }
+
 
 class _paypalState extends State<paypal> {
   final databaseReference = FirebaseFirestore.instance;
@@ -43,6 +45,7 @@ class _paypalState extends State<paypal> {
           .map((DocumentSnapshot document) => document.data() as Map<dynamic, dynamic>)
           .toList();
     });
+
   }
 
   void redirectToMyAccount() {
@@ -52,8 +55,15 @@ class _paypalState extends State<paypal> {
     print('Redirecting to myaccount()');
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+    int days = widget.differenceInDays;
+    double price = double.parse(productList[0]["price"] ?? "0");
+    double tot = price * days;
+    print(price);
+    print(tot);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(47, 114, 100, 1),
@@ -73,8 +83,9 @@ class _paypalState extends State<paypal> {
           SizedBox(
             height: 30,
           ),
+
           Text(
-            "TOTAL| RS: ${productList[0]["price"] ?? ""}",
+            "TOTAL | RS: $tot",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
