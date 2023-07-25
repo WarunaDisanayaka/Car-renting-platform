@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // <<<<<<< HEAD
 // import 'dart:ui';
 //
@@ -567,6 +568,8 @@
 // }
 // >>>>>>> parent of d50424b (car image fetch from db)
 =======
+=======
+>>>>>>> parent of 1955279 (n c)
 import 'dart:ui';
 
 import 'package:cr_app/home.dart';
@@ -632,6 +635,7 @@ class _ViewState extends State<view> {
         children: [
           SizedBox(
             width: double.infinity,
+<<<<<<< HEAD
             child: Image.asset('assets/cr4.jpeg'),
             height: 390,
           ),
@@ -640,6 +644,16 @@ class _ViewState extends State<view> {
           //   width: 200, // Adjust the width as per your requirement
           //   height: 200, // Adjust the height as per your requirement
           // )
+=======
+            child:  Image.network(
+              widget.product["image"] ?? "", // Assuming "model" contains a valid image URL
+              width: 200, // Adjust the width as per your requirement
+              height: 200, // Adjust the height as per your requirement
+            ),
+            height: 390,
+          ),
+
+>>>>>>> parent of 1955279 (n c)
           scroll(),
         ],
       ),
@@ -849,4 +863,7 @@ class _ViewState extends State<view> {
     );
   }
 }
+<<<<<<< HEAD
 >>>>>>> parent of d50424b (car image fetch from db)
+=======
+>>>>>>> parent of 1955279 (n c)
