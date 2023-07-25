@@ -46,8 +46,6 @@ dependencies:
   email_validator: ^2.1.17
   geocoding: ^2.0.1
   flutter_paypal: ^0.0.8
-  firebase_storage: ^11.2.1
-  image_picker: ^0.8.7+5
 
 
 dev_dependencies:
