@@ -297,13 +297,13 @@ class _ProductListState extends State<ProductList> {
                                       fixedSize: Size(100, 30),
                                     ),
                                     onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              view(product: product),
-                                        ),
-                                      );
+                                      //Navigator.push(
+                                        //context,
+                                        // MaterialPageRoute(
+                                        //   builder: (context) =>
+                                        //       view(product: product),
+                                        // ),
+                                     // );
                                     },
                                   ),
                                 ],
